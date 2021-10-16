@@ -71,3 +71,6 @@ Hyperledger Irohaを学習するためのリポジトリです。
     
 ### irohaプロセス起動コマンド
     irohad --config config.docker --genesis_block genesis.block --keypair_name node0
+
+### iroha-cliの起動コマンド(admin@test.pubファイルが存在するディレクトリで打ちこむ)
+    iroha-cli -account_name admin@test
