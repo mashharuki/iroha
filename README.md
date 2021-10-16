@@ -62,3 +62,6 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
 ### node用コンテナ作成コマンド
     docker run -it -d --name iroha -p 50051:50051 -v ~/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network --entrypoint=/bin/bash hyperledger/iroha:develop
+    
+### コンテナへのアクセスコマンド
+    docker exec -it iroha /bin/bash 
