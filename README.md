@@ -58,7 +58,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
 ~~~
 
 ### DBコンテナ作成コマンド
-    `docker run -it -d --name some-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 --network iroha-network postgres 9.5`
+    docker run -it -d --name some-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 --network iroha-network postgres 9.5
 
 ### node用コンテナ作成コマンド
-    `docker run -it -d --name iroha -p 50051:50051 -v ~/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network --entrypoint=/bin/bash hyperledger/iroha:develop`
+    docker run -it -d --name iroha -p 50051:50051 -v ~/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network --entrypoint=/bin/bash hyperledger/iroha:develop
