@@ -65,6 +65,11 @@ Hyperledger Irohaを学習するためのリポジトリです。
     
 ### コンテナへのアクセスコマンド
     docker exec -it iroha /bin/bash 
+    docker exec -it some-postgres /bin/bash
+
+### DB操作コマンド
+    psql -U postgres postgres
+    ¥dt;
     
 ### Dockerホストからコンテナへディレクトリをコピーするコマンド
     docker cp ~/git/iroha/example/ 601126ae851d:/opt/iroha_data
