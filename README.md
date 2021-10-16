@@ -68,3 +68,6 @@ Hyperledger Irohaを学習するためのリポジトリです。
     
 ### Dockerホストからコンテナへディレクトリをコピーするコマンド
     docker cp ~/git/iroha/example/ 601126ae851d:/opt/iroha_data
+    
+### irohaプロセス起動コマンド
+    irohad --config config.docker --genesis_block genesis.block --keypair_name node0
