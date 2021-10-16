@@ -68,7 +68,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
     docker exec -it some-postgres /bin/bash
 
 ### DB操作コマンド
-    psql -U postgres postgres
+    psql -U postgres iroha_default
     ¥dt;
     
 ### Dockerホストからコンテナへディレクトリをコピーするコマンド
