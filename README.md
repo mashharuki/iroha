@@ -165,27 +165,66 @@ Hyperledger Irohaを学習するためのリポジトリです。
 }
 
 ~~~
-
-### DBコンテナ作成コマンド
-    docker run -it -d --name some-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=***** -p 5432:5432 --network iroha-network postgres:9.5
-
-### node用コンテナ作成コマンド
-    docker run -it -d --name iroha -p 50051:50051 -v ~/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network --entrypoint=/bin/bash hyperledger/iroha:develop
     
 ### コンテナへのアクセスコマンド
-    docker exec -it iroha /bin/bash 
+    docker exec -it iroha /bin/bash
+    docker exec -it iroha1 /bin/bash
+    docker exec -it iroha2 /bin/bash 
     docker exec -it some-postgres /bin/bash
 
 ### DB操作コマンド
-    psql -U postgres iroha_default
-    ¥dt;
+    1. スキーマ「iroha_default」でDBにログインする。
+
+   `psql -U postgres iroha_default`  
+
+   `CREATE DATABSE reidai;`  
+
+   `CREATE TABLE kaiin_info (  
+      no serial,   
+      id VARCHAR(20),   
+      name VARCHAR(50),   
+      kana VARCHAR(50),  
+      addr VARCHAR(100),  
+      tel VARCHAR(30),   
+      bd VARCHAR(20),  
+      ed VARCHAR(20,  
+      block bigint,  
+      today timestamp DEFAULT now(),  
+      RAIMARY KEY (no));`  
+
+   `CREATE TABLE shiharai_info (
+      no serial,   
+      id VARCHAR(20),  
+      prepay numeric,
+      ticket numeric,
+      total numeric,
+      shisetsu VARCHAR(50),
+      ninzu int,
+      usetime numeric,
+      job VARCHAR(10),
+      today timestamp DEFAULT now(),  
+      RAIMARY KEY (no));`
+
+   `¥q`  
     
 ### Dockerホストからコンテナへディレクトリをコピーするコマンド
-    docker cp ~/git/iroha/example/ 601126ae851d:/opt/iroha_data
+   `docker cp ~/git/iroha/example/ 601126ae851d:/opt/iroha_data`
     
-### irohaプロセス起動コマンド
-    irohad --config config.docker --genesis_block genesis.block --keypair_name node0
+### irohaプロセス起動コマンド (--genesis_block genesis.blockは初回起動時のみ付与する。)
+   `irohad --config config.docker --genesis_block genesis.block --keypair_name node0`   
+   `irohad --config config.docker --genesis_block genesis.block --keypair_name node1`  
+   `irohad --config config.docker --genesis_block genesis.block --keypair_name node2`  
 
 ### iroha-cliの起動コマンド(admin@test.pubファイルが存在するディレクトリで打ちこむ)
-    iroha-cli -account_name admin@test
+   `iroha-cli -account_name admin@test`  
+
+### コンテナ削除コマンド
+   `docker rm iroha iroha1 iroha2 some-postgres some-postgres1 somepostgre2`  
+
+### コンテナ起動＆停止コマンド
+   `docker start iroha iroha1 iroha2 some-postgres some-postgres1 somepostgre2`  
+   `docker stop iroha iroha1 iroha2 some-postgres some-postgres1 somepostgre2`
+
+### ボリューム作成コマンド
+   `docker volume create blockstore`  
 
