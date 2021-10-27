@@ -1,0 +1,143 @@
+# Hyperledger Iroha用のコンテナ環境を構築する
+
+# バージョン定義
+version: "3.6"
+
+# サービスの定義
+services:
+  # peer0用のサービス
+  iroha:
+    # イメージ
+    image: hyperledger/iroha:develop
+    # コンテナ名を明示する
+    container_name: iroha
+    # ホスト名を明示する
+    hostname: iroha
+    # ポート番号
+    ports:
+      - 51051:50051
+    entrypoint:
+      - /bin/bash
+    # ボリュームの定義
+    volumes:
+      - ~/git/iroha/example/:/opt/iroha_data
+      - blockstore:/tmp/block_store
+    # ネットワークの設定
+    networks:
+      - container-link
+  # peer1用のサービス
+  iroha1:
+    # イメージ
+    image: hyperledger/iroha:develop
+    # コンテナ名を明示する
+    container_name: iroha1
+    # ホスト名を明示する
+    hostname: iroha1
+    # ポート番号
+    ports:
+      - 52051:50051
+    entrypoint:
+      - /bin/bash
+    # ボリュームの定義
+    volumes:
+      - ~/git/iroha/example1/:/opt/iroha_data
+      - blockstore1:/tmp/block_store
+    # ネットワークの設定
+    networks:
+      - container-link
+  # peer2用のサービス
+  iroha2:
+    # イメージ
+    image: hyperledger/iroha:develop
+    # コンテナ名を明示する
+    container_name: iroha2
+    # ホスト名を明示する
+    hostname: iroha2
+    # ポート番号
+    ports:
+      - 53051:50051
+    entrypoint:
+      - /bin/bash
+    # ボリュームの定義
+    volumes:
+      - ~/git/iroha/example2/:/opt/iroha_data
+      - blockstore2:/tmp/block_store
+    # ネットワークの設定
+    networks:
+      - container-link
+
+  # peer0用のDBサービス
+  some-postgres:
+    # イメージ
+    image: postgres:9.5
+    # コンテナ名を明示する
+    container_name: some-postgres
+    # ホスト名を明示する
+    hostname: some-postgres
+    # 環境変数
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    posts:
+      - 15432:5432
+    # ネットワークの設定
+    networks:
+      - container-link
+  # peer1用のDBサービス
+  some-postgres1:
+    # イメージ
+    image: postgres:9.5
+    # コンテナ名を明示する
+    container_name: some-postgres1
+    # ホスト名を明示する
+    hostname: some-postgres1
+    # 環境変数
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    posts:
+      - 25432:5432
+    # ネットワークの設定
+    networks:
+      - container-link
+  # peer2用のDBサービス
+  some-postgres2:
+    # イメージ
+    image: postgres:9.5
+    # コンテナ名を明示する
+    container_name: some-postgres2
+    # ホスト名を明示する
+    hostname: some-postgres2
+    # 環境変数
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    posts:
+      - 35432:5432
+    # ネットワークの設定
+    networks:
+      - container-link
+
+# ネットワーク定義
+networks:
+  default:
+    external:
+      name: bridge
+  # コンテナ間通信用のネットワークセグメント
+  container-link:
+    name: iroha-network
+
+# データボリューム定義
+volumes:
+  # peer0用のボリュームの定義
+  blockstore-value:
+    name: blockstore
+    driver: local
+  # peer1用のボリュームの定義
+  blockstore-value1:
+    name: blockstore1
+    driver: local
+  # peer2用のボリュームの定義
+  blockstore-value2:
+    name: blockstore2
+    driver: local
