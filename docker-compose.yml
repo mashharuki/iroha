@@ -16,8 +16,8 @@ services:
     # ポート番号
     ports:
       - 51051:50051
-    entrypoint:
-      - /bin/bash
+    entrypoint: "/bin/bash"
+    tty: true
     # ボリュームの定義
     volumes:
       - ~/git/iroha/example/:/opt/iroha_data
@@ -36,8 +36,8 @@ services:
     # ポート番号
     ports:
       - 52051:50051
-    entrypoint:
-      - /bin/bash
+    entrypoint: "bin/bash"
+    tty: true
     # ボリュームの定義
     volumes:
       - ~/git/iroha/example1/:/opt/iroha_data
@@ -56,8 +56,8 @@ services:
     # ポート番号
     ports:
       - 53051:50051
-    entrypoint:
-      - /bin/bash
+    entrypoint:　"/bin/bash"
+    tty: true
     # ボリュームの定義
     volumes:
       - ~/git/iroha/example2/:/opt/iroha_data
