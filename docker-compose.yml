@@ -8,7 +8,7 @@ services:
   # peer0用のサービス
   iroha:
     # イメージ
-    image: hyperledger/iroha:develop
+    image: hyperledger/iroha:1.1.0
     # コンテナ名を明示する
     container_name: iroha
     # ホスト名を明示する
@@ -28,7 +28,7 @@ services:
   # peer1用のサービス
   iroha1:
     # イメージ
-    image: hyperledger/iroha:develop
+    image: hyperledger/iroha:1.1.0
     # コンテナ名を明示する
     container_name: iroha1
     # ホスト名を明示する
@@ -48,7 +48,7 @@ services:
   # peer2用のサービス
   iroha2:
     # イメージ
-    image: hyperledger/iroha:develop
+    image: hyperledger/iroha:1.1.0
     # コンテナ名を明示する
     container_name: iroha2
     # ホスト名を明示する
