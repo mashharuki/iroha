@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>コワーキングスペース日本</title>
+</head>
+<body>
+    <p>チャージ画面</p>
+    <a href="http://localhost:8080/topmenu">トップメニューに戻る</a><br/><br/>
+    <FORM action="http://localhost:8080/charge" method="post">
+        チャージアカウント：<input type="text" name="accountid" size="10" value="777" readonly><br/>
+        <hr size="1">
+        プリペイ残高は 888 です。<br/>
+        プリペイ：<select name="prepay">
+                    <option value="0" selected >なし</option>
+                    <option value="3500">3000円</option>
+                    <option value="6000">5000円</option>
+                    <option value="14000">10000円</option>
+                   </select><br/><br/>
+         回数券残数は 999 です。<br/>
+         回数券：<select name="ticket">
+                    <option value="0" selected >なし</option>
+                    <option value="11">10枚セット</option>
+                    <option value="35">30枚セット</option>
+                    <option value="50">50枚セット</option>
+                   </select><br/><br/>
+        お支払現金：<input type="number" name="total" size="10"><br/><br/>
+        <input type="submit" value="チャージ"><br/>
+    </FORM>
+</body>
+</html>

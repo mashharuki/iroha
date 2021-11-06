@@ -18,7 +18,7 @@
                           "addPeer":{
                              "peer":{
                                 "address":"iroha1:10001",
-                                "peerKey":"42b86a5b5eef5146ae9fc4191ece5cfb23c650be2b291200e6dc4fe34aa5638e"
+                                "peerKey":"94cc41678114bfb18c8c3e59c223e303410856bda6e34833bb4e14b2daa803dd"
                              }
                           }
                        },
@@ -26,7 +26,7 @@
                           "addPeer":{
                              "peer":{
                                 "address":"iroha2:10001",
-                                "peerKey":"3b3f83ca158a4ca2aaf6e6bfedc976ead0753f4ce466f78504f3509d121ffe8a"
+                                "peerKey":"4c5a1ff9494101034a37760eaf53bef3828acfda4f61d7e8f6d3f8fb599e03bb"
                              }
                           }
                        },
