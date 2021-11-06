@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>コワーキングスペース日本</title>
+<script type="text/javascript">
+<!-- 
+function zandaka_check() {
+  let prepay_input = parseFloat(document.form1.prepay.value);
+  let prepay_zandaka = parseFloat(document.form1.prepay_zandaka.value);
+  let ticket_input = parseInt(document.form1.ticket.value);
+  let ticket_zandaka = parseInt(document.form1.ticket_zandaka.value);
+  if ( prepay_input > prepay_zandaka || ticket_input > ticket_zandaka ){
+    alert("入力値が残高を超えています。");
+    document.form1.button1.disabled = true;
+  } else {
+    document.form1.button1.disabled = false;
+  }
+}
+// -->
+</script>
+</head>
+<body>
+    <p>お支払画面</p>
+    <a href="http://localhost:8080/topmenu">トップメニューに戻る</a><br/><br/>
+    <FORM name="form1" action="http://localhost:8080/shiharai" method="post">
+        支払いアカウント：<input type="text" name="accountid" size="10" value="777" readonly><br/>
+        <hr size="1">
+        ご利用施設：<select name="shisetsu">
+                    <option value="フリースペース" selected >フリースペース</option>
+                    <option value="A会議室">A会議室</option>
+                    <option value="B会議室">B会議室</option>
+                    <option value="シアター">シアター</option>
+                   </select><br/>
+        人数：<select name="ninzu">
+                    <option value="1" selected >お一人様</option>
+                    <option value="2">2人</option>
+                    <option value="3">3人</option>
+                    <option value="4">4人</option>
+                    <option value="5">5人</option>
+                    </select><br/>
+        ご利用時間：<select name="usetime">
+                    <option value="0.5" selected >30分</option>
+                    <option value="1">1時間</option>
+                    <option value="2">2時間</option>
+                    <option value="3">3時間</option>
+                    <option value="4">4時間</option>
+                    <option value="5">5時間</option>
+                   </select><br/>
+        <hr size="1">
+        プリペイ残高は <input type="text" name="prepay_zandaka" size="10" value="888" readonly> です。<br/>
+        プリペイ：<input type="number" name="prepay" size="10" onchange="zandaka_check();" >円<br/><br/>
+        回数券残数は <input type="text" name="ticket_zandaka" size="10" value="999"  readonly> です。<br/>
+        回数券：<select name="ticket" onclick="zandaka_check();" >
+                    <option value="0" selected >なし</option>
+                    <option value="1">1枚</option>
+                    <option value="2">2枚</option>
+                    <option value="3">3枚</option>
+                    </select><br/><br/>
+        お支払現金：<input type="number" name="total" size="10">円<br/><br/>
+        <input type="submit" name="button1" value="お支払">
+    </FORM>
+</body>
+</html>
