@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect, ReactElement } from "react";
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 
@@ -18,13 +18,11 @@ function Home():ReactElement {
     const classes = UseStyles();
     // 「チャージアカウント」ボタンを押した時の遷移先と渡す情報
     const ToCharge = { 
-        pathname: '/charge',
-        state: { accountId: chargeAccountId },
+        accountId: chargeAccountId 
     };
     // 「支払いアカウント」ボタンを押した時の遷移先と渡す情報
     const ToPay = { 
-        pathname: '/pay',
-        state: { accountId: payAccountId },
+        accountId: payAccountId 
     };
 
     return (
@@ -45,8 +43,10 @@ function Home():ReactElement {
                 onChange={ (e) => setChargeAccountId(e.target.value) } 
                 placeholder="Set account ID" 
             />
-            <Button variant="contained" color="primary" component={Link} to={ToCharge} >
-                ２．チャージ
+            <Button variant="contained" color="secondary">
+                <Link to='/charge' state={ToCharge}>
+                    ２．チャージ
+                </Link>
             </Button>
             <br/>
             支払いアカウント：　
@@ -57,8 +57,10 @@ function Home():ReactElement {
                 onChange={ (e) => setPayAccountId(e.target.value) } 
                 placeholder="Set account ID" 
             />
-            <Button variant="contained" color="primary" component={Link} to={ToPay} >
-                ３．支払
+            <Button variant="contained" color="secondary" >
+                <Link to='/pay' state={ToPay}>
+                    ３．支払
+                </Link>
             </Button>
         </div>
     );
