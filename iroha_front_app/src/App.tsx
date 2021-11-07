@@ -9,6 +9,7 @@ import Home from "./component/pages/Home";
 import Input from './component/pages/Input';
 import Pay from './component/pages/Pay';
 import Charge from './component/pages/Charge';
+import NoPage from './component/pages/NoPage';
 import UseStyles from "./component/common/UseStyles";
 
 function App():ReactElement {
@@ -23,7 +24,7 @@ function App():ReactElement {
           <Route path="/input" element={<Input />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/charge" element={<Charge />} />
-          <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </div>
     </Router>
