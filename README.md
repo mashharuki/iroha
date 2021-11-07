@@ -236,3 +236,10 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
 ### docker-compose起動コマンド(irohaコンテナとpostgresコンテナがそれぞれ3つ立ち上がる。)
    `docker-compose up -d`
+
+### サンプルフロントエンド用アプリケーション実行コマンド
+   1. `cd iroha_front_app`  
+   2. `npm run start`
+
+### iroha_front_appについて
+    TypeScript + Reactにより構築
