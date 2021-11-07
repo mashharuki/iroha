@@ -4,6 +4,9 @@
 
 import React, { useState, useEffect, ReactElement } from "react";
 import { Link, useLocation } from 'react-router-dom';
+import { Button } from "@material-ui/core";
+import Input from '@material-ui/core/Input';
+import UseStyles from "../common/UseStyles";
 
 /**
  * Payコンポーネント
@@ -34,6 +37,9 @@ function Pay(props:any):ReactElement {
             <p>
                 対象アカウントID：　{accountId}
             </p>
+            <Button variant="contained" color="secondary">
+                支払い実行
+            </Button>
             <Link to={{ pathname: '/'}}>
                 メインメニューに戻る
             </Link>

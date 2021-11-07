@@ -242,4 +242,5 @@ Hyperledger Irohaを学習するためのリポジトリです。
    2. `npm run start`
 
 ### iroha_front_appについて
-    TypeScript + Reactにより構築
+    TypeScript + Reactにより構築。  
+    
