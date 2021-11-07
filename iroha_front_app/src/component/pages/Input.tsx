@@ -67,7 +67,7 @@ function Input():ReactElement {
                 value={bd} 
                 className={classes.textField}
                 onChange={ (e:any) => setBd(e.target.value) } 
-            /><br/>
+            /><br/><br/>
             <Button variant="contained" color="secondary">
                 登録
             </Button>

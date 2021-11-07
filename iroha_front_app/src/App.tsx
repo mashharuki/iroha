@@ -11,6 +11,9 @@ import Pay from './component/pages/Pay';
 import Charge from './component/pages/Charge';
 import NoPage from './component/pages/NoPage';
 import UseStyles from "./component/common/UseStyles";
+import { AppBar } from '@material-ui/core';
+import { Toolbar } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 function App():ReactElement {
   // スタイルを使用するための変数を用意する。
@@ -18,6 +21,13 @@ function App():ReactElement {
 
   return (
     <Router>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Typography variant="h5" color="inherit" component="div">
+            Hyperledger Irohaサンプルアプリ
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <div className={classes.root}>
         <Routes>
           <Route path="/" element={<Home />} />
