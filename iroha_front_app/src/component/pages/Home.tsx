@@ -49,6 +49,7 @@ function Home():ReactElement {
                 </Link>
             </Button>
             <br/>
+            <br/>
             支払いアカウント：　
             <Input 
                 id="payAccountId" 
