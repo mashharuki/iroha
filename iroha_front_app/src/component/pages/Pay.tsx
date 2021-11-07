@@ -11,9 +11,8 @@ import { Link, useLocation } from 'react-router-dom';
 function Pay(props:any):ReactElement {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('')
-
     // chargAccoutId用変数
-    let chargeAccountId:string = ''
+    let payAccountId:string = ''
     const location = useLocation();
 
     /**
@@ -22,9 +21,9 @@ function Pay(props:any):ReactElement {
      useEffect(() => {
         console.log("props:", location)
         // 遷移元で入力したアカウントIDの情報を取得する。
-        chargeAccountId = location.state.accountId;
+        payAccountId = location.state.accountId;
         // ステート変数をセットする。
-        setAccoutId(chargeAccountId)
+        setAccoutId(payAccountId)
     }, []);
 
     return (
