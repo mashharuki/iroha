@@ -18,29 +18,30 @@ function Home():ReactElement {
     const classes = UseStyles();
     // 「チャージアカウント」ボタンを押した時の遷移先と渡す情報
     const ToCharge = { 
-        pathname: 'http://localhost:8080/zandaka1',
+        pathname: '/charge',
         state: { accountId: chargeAccountId },
     };
     // 「支払いアカウント」ボタンを押した時の遷移先と渡す情報
     const ToPay = { 
-        pathname: 'http://localhost:8080/zandaka2',
+        pathname: '/pay',
         state: { accountId: payAccountId },
     };
 
     return (
         <div className="App">
             <h2>
-                処理メニュー
+                メインメニュー
             </h2>
-            <Link to={{ pathname: 'http://localhost:8080/kaiin_input'}}>
+            <Link to={{ pathname: '/input'}}>
                 １．新規会員登録
             </Link>
             <br/>
             <br/>
-            チャージアカウント：
+            チャージアカウント：　
             <Input 
                 id="chargeAccountId" 
                 value={chargeAccountId} 
+                className={classes.textField}
                 onChange={ (e) => setChargeAccountId(e.target.value) } 
                 placeholder="Set account ID" 
             />
@@ -48,10 +49,11 @@ function Home():ReactElement {
                 ２．チャージ
             </Button>
             <br/>
-            支払いアカウント：
+            支払いアカウント：　
             <Input 
                 id="payAccountId" 
                 value={payAccountId} 
+                className={classes.textField}
                 onChange={ (e) => setPayAccountId(e.target.value) } 
                 placeholder="Set account ID" 
             />
