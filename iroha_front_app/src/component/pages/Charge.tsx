@@ -14,6 +14,7 @@ function Charge(props:any):ReactElement {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('')
     const [ prepay, setPrepay ] = useState(0)
+    const [ counter, setCounter ] = useState(0)
     // chargAccoutId用変数
     let chargeAccountId:string = ''
     const location = useLocation();
@@ -42,7 +43,7 @@ function Charge(props:any):ReactElement {
                 <InputLabel id="prepay">Prepay</InputLabel>
                 <Select
                     labelId="prepay"
-                    id="prepay"
+                    id="prepay2"
                     value={prepay}
                     label="Prepay"
                     onChange={(e:any) => { setPrepay(e.target.value) }}
@@ -54,9 +55,24 @@ function Charge(props:any):ReactElement {
                 </Select>
             </FormControl><br/>
             回数券残数は 999 です。<br/>
+            <FormControl size="medium">
+                <InputLabel id="counter">Counter</InputLabel>
+                <Select
+                    labelId="counter"
+                    id="counter2"
+                    value={counter}
+                    label="counter"
+                    onChange={(e:any) => { setCounter(e.target.value) }}
+                >
+                    <MenuItem value={0}>なし</MenuItem>
+                    <MenuItem value={11}>10枚セット</MenuItem>
+                    <MenuItem value={35}>30枚セット</MenuItem>
+                    <MenuItem value={50}>50枚セット</MenuItem>
+                </Select>
+            </FormControl><br/><br/>
             <Button variant="contained" color="secondary">
                 チャージ実行
-            </Button>
+            </Button><br/><br/>
             <Link to={{ pathname: '/'}}>
                 メインメニューに戻る
             </Link>
