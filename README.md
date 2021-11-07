@@ -1,5 +1,9 @@
 # iroha
-Hyperledger Irohaを学習するためのリポジトリです。
+Hyperledger Irohaを学習するためのリポジトリです。  
+
+## 注意事項
+   この中で利用している公開鍵及び秘密鍵の情報は全て開発用として生成しています。  
+   絶対に本番環境では利用しないようにしてください。
 
 ## Hyperledger Iroha
    hyperledgerプロジェクトで4番目に採択されたブロックチェーン  
@@ -209,7 +213,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
    `¥q`  
     
-### Dockerホストからコンテナへディレクトリをコピーするコマンド
+### Dockerホストからコンテナへディレクトリをコピーするコマンド(例)
    `docker cp ~/git/iroha/example/ 601126ae851d:/opt/iroha_data`
     
 ### irohaプロセス起動コマンド (--genesis_block genesis.blockは初回起動時のみ付与する。)
@@ -230,3 +234,5 @@ Hyperledger Irohaを学習するためのリポジトリです。
 ### ボリューム作成コマンド
    `docker volume create blockstore`  
 
+### docker-compose起動コマンド(irohaコンテナとpostgresコンテナがそれぞれ3つ立ち上がる。)
+   `docker-compose up -d`
