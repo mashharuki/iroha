@@ -4,7 +4,10 @@
 
 import React, { useState, useEffect, ReactElement } from "react";
 import { Link, useLocation } from 'react-router-dom';
-import { Button, MenuItem,  FormControl, Select, InputLabel } from "@material-ui/core";
+import { Button, MenuItem, Select } from "@material-ui/core";
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 import UseStyles from "../common/UseStyles";
 
 /**
@@ -39,13 +42,14 @@ function Charge(props:any):ReactElement {
                 対象アカウントID：　{accountId}
             </p>
             プリペイ残高は 888 です。<br/>
-            <FormControl size="medium">
+            <FormControl size="medium" sx={{ m: 1, width: 300 }}>
                 <InputLabel id="prepay">Prepay</InputLabel>
                 <Select
                     labelId="prepay"
                     id="prepay2"
                     value={prepay}
                     label="Prepay"
+                    input={<OutlinedInput id="select-prepay" label="Prepay" />}
                     onChange={(e:any) => { setPrepay(e.target.value) }}
                 >
                     <MenuItem value={0}>なし</MenuItem>
@@ -55,13 +59,14 @@ function Charge(props:any):ReactElement {
                 </Select>
             </FormControl><br/>
             回数券残数は 999 です。<br/>
-            <FormControl size="medium">
+            <FormControl size="medium" sx={{ m: 1, width: 300 }}>
                 <InputLabel id="counter">Counter</InputLabel>
                 <Select
                     labelId="counter"
                     id="counter2"
                     value={counter}
                     label="counter"
+                    input={<OutlinedInput id="select-counter" label="Counter" />}
                     onChange={(e:any) => { setCounter(e.target.value) }}
                 >
                     <MenuItem value={0}>なし</MenuItem>
