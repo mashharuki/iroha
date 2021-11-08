@@ -24,6 +24,7 @@ function Pay(props:any):ReactElement {
     // chargAccoutId用変数
     let payAccountId:string = ''
     const location = useLocation();
+    const classes = UseStyles();
 
     /**
      * 副作用フック
@@ -117,6 +118,28 @@ function Pay(props:any):ReactElement {
                     </FormControl>
                 </Grid>
             </Grid><br/>
+            <Grid container direction="row" justifyContent="center" alignItems="center" >
+                <Grid item>
+                    プリペイ：
+                </Grid>
+                <Grid item>
+                    <Input 
+                        id="prepay"  
+                        className={classes.textField}
+                    />
+                </Grid>
+            </Grid><br/>
+            <Grid container direction="row" justifyContent="center" alignItems="center" >
+                <Grid item>
+                    回数券：
+                </Grid>
+                <Grid item>
+                    <Input 
+                        id="couter" 
+                        className={classes.textField}
+                    />
+                </Grid>
+            </Grid> <br/>
             <Button variant="contained" color="secondary">
                 支払い実行
             </Button><br/><br/>
