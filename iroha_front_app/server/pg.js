@@ -12,14 +12,18 @@ function pg () {
 
     client.connect()
 
-    const query:string = 'SELECT * FROM role'
+    const query = 'SELECT * FROM role'
 
     client.query(query)
-        .then((res: any) => {
-            console.log(res.rows[0])
-            client.end()
+        .then((res) => {
+            console.log(res.rows[0]);
+            client.end();
+            return res;
         })
-        .catch((e: any) => console.error(e.stack))
+        .catch((e) => {
+            console.error(e.stack);
+            return e;
+        });
 }
 
 export default pg
