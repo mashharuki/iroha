@@ -2,7 +2,7 @@
  * DB接続用のモジュール
  */
 
-const execute = async function (query, values) {
+const execute = function (query, values) {
     const { Client } = require('pg');
     // DB接続用の初期設定
     const client = new Client({

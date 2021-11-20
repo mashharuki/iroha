@@ -19,8 +19,11 @@ const pgHelper = require('./server/pgHelper');
  * テスト用のAPI
  */
 app.get('/api/test', (req, res) => {
+    // SQL文
+    const query = req.query.query;
+    const values = req.query.values2;
     // DBの実行
-    const result = await pgHelper.execute(req.query.query , req.query.values2);
+    const result = pgHelper.execute(query, values);
     console.log('取得結果：', result);
     // 結果を返却する。
     return result;
