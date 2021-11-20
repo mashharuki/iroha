@@ -239,7 +239,8 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
 ### サンプルフロントエンド用アプリケーション実行コマンド
    1. `cd iroha_front_app`  
-   2. `npm run start`
+   2. `npm run build`
+   3. `node server.js`
 
 ### iroha_front_appについて
     TypeScript + Reactにより構築。  

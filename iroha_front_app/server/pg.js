@@ -1,3 +1,6 @@
+/**
+ * DB接続用のモジュール
+ */
 
 function pg () {
     const { Client } = require('pg')
@@ -26,4 +29,4 @@ function pg () {
         });
 }
 
-export default pg
+module.exports = { pg };

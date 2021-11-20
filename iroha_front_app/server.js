@@ -15,16 +15,15 @@ app.listen(portNo, () => {
 const pg = require('./server/pg');
 
 // APIの定義
-
 /**
  * テスト用のAPI
  */
 app.get('api/test', (req, res) => {
     // DBの実行
-    const res = pg;
-    console.log('取得結果：', res);
+    const result = pg();
+    console.log('取得結果：', result);
     // 結果を返却する。
-    return res.json;
+    return result.json;
 });
 
 // 静的ファイルを自動的に返すようルーティングする。
