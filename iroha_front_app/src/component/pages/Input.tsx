@@ -44,7 +44,7 @@ function Input():ReactElement {
                     return err;
                 }
                 // 結果を取得する。
-                const r = res.body;
+                const r = res.body.rows;
                 console.log("API呼び出し結果：", r);
             });
         return
