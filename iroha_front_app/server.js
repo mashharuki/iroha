@@ -20,7 +20,7 @@ const pg = require('./server/pg');
  */
 app.get('/api/test', (req, res) => {
     // DBの実行
-    const result = pg();
+    const result = pg.pg();
     console.log('取得結果：', result);
     // 結果を返却する。
     return result.json;
