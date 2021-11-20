@@ -24,11 +24,17 @@ function Input():ReactElement {
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
      */
-    const inputAction = ():void => {
+    const inputAction = ():any => {
+        // 実行するSQL
+        const query:string = 'SELECT * FROM role'
+        // SQLにセットするパラメータ
+        const values2:any[] = [] 
+        // API用のパラメータ変数
+        const params = { query, values2 };
         // 登録用のAPIを呼び出す。
         superAgent
             .get(baseUrl + '/api/test')
-            // .query(values) //パラメータがある場合は、指定する。
+            .query(params) 
             .end((err, res) => {
                 if (err) {
                     console.log("API呼び出し中に失敗", err)

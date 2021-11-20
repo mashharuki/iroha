@@ -12,7 +12,7 @@ app.listen(portNo, () => {
     console.log('起動しました', `http://localhost:${portNo}`)
 });
 // DB接続用のモジュールを読みこむ
-const pg = require('./server/pg');
+const pgHelper = require('./server/pgHelper');
 
 // APIの定義
 /**
@@ -20,7 +20,7 @@ const pg = require('./server/pg');
  */
 app.get('/api/test', (req, res) => {
     // DBの実行
-    const result = pg.pg();
+    const result = await pgHelper.execute(req.query.query , req.query.values2);
     console.log('取得結果：', result);
     // 結果を返却する。
     return result;
