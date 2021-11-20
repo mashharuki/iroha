@@ -23,7 +23,7 @@ app.get('/api/test', (req, res) => {
     const result = pg.pg();
     console.log('取得結果：', result);
     // 結果を返却する。
-    return result.json;
+    return result;
 });
 
 // 静的ファイルを自動的に返すようルーティングする。
