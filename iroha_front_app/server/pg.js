@@ -2,7 +2,7 @@
  * DB接続用のモジュール
  */
 
-function pg () {
+const pg = function () {
     const { Client } = require('pg')
 
     const client = new Client({
