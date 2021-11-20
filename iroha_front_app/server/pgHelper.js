@@ -22,7 +22,6 @@ const execute = function (query, values, callback) {
     if (typeof values === "undefined") {
         client.query(query)
             .then((res) => {
-                console.log(res.rows[0]);
                 client.end();
                 callback(null, res)
             })
@@ -32,7 +31,6 @@ const execute = function (query, values, callback) {
     } else {
         client.query(query, values)
             .then((res) => {
-                console.log(res.rows[0]);
                 client.end();
                 callback(null, res)
             })
