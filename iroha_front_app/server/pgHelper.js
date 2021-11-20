@@ -8,7 +8,7 @@ const execute = function (query, values, callback) {
     const client = new Client({
         user: 'postgres',
         host: '127.0.0.1',
-        database: 'iroha_default',
+        database: 'reidai',
         password: 'mysecretpassword',
         port: 15432,
     });

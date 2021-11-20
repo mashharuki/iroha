@@ -244,6 +244,10 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
 ### iroha_front_appについて
     TypeScript + Reactにより構築。  
+
+### server.jsについて
+    expressを利用して構築したWebサーバー  
+    各種必要なAPIを定義している。
     
 ### superAgentを使用する際の注意点
     superAgentは、JavaScriptのライブラリなので直接読み込もうとすると  

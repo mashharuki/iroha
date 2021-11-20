@@ -33,6 +33,60 @@ app.get('/api/test', (req, res) => {
     });
 });
 
+/**
+ * アカウント新規登録処理用API
+ */
+app.get('/api/input', (req, res) => {
+    // SQL文
+    const query = req.query.query;
+    const values = req.query.values;
+    // DBの実行
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('取得結果：', docs.rows);
+        res.json({ roles: docs.rows });
+    });
+});
+
+/**
+ * チャージ処理用API
+ */
+app.get('/api/charge', (req, res) => {
+    // SQL文
+    const query = req.query.query;
+    const values = req.query.values;
+    // DBの実行
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('取得結果：', docs.rows);
+        res.json({ roles: docs.rows });
+    });
+});
+
+/**
+ * 支払処理用API
+ */
+app.get('/api/pay', (req, res) => {
+    // SQL文
+    const query = req.query.query;
+    const values = req.query.values;
+    // DBの実行
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('取得結果：', docs.rows);
+        res.json({ roles: docs.rows });
+    });
+});
+
 // 静的ファイルを自動的に返すようルーティングする。
 app.use('/input', express.static('./build'));
 app.use('/pay', express.static('./build'));
