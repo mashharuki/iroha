@@ -193,10 +193,10 @@ Hyperledger Irohaを学習するためのリポジトリです。
       addr VARCHAR(100),  
       tel VARCHAR(30),   
       bd VARCHAR(20),  
-      ed VARCHAR(20,  
+      ed VARCHAR(20),  
       block bigint,  
       today timestamp DEFAULT now(),  
-      PRAIMARY KEY (no));`  
+      PRIMARY KEY (no));`  
 
    `CREATE TABLE shiharai_info (
       no serial,   
@@ -209,7 +209,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
       usetime numeric,
       job VARCHAR(10),
       today timestamp DEFAULT now(),  
-      PRAIMARY KEY (no));`
+      PRIMARY KEY (no));`
 
    `¥q`  
     
