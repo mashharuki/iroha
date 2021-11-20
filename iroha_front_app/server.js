@@ -28,8 +28,8 @@ app.get('/api/test', (req, res) => {
             console.log(err.toString());
             return;
         }
-        console.log('取得結果：', docs);
-        res.json({ roles: docs });
+        console.log('取得結果：', docs.rows);
+        res.json({ roles: docs.rows });
     });
 });
 
