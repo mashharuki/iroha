@@ -245,3 +245,10 @@ Hyperledger Irohaを学習するためのリポジトリです。
 ### iroha_front_appについて
     TypeScript + Reactにより構築。  
     
+### superAgentを使用する際の注意点
+    superAgentは、JavaScriptのライブラリなので直接読み込もうとすると  
+    怒られる。そのため次のコマンドを打ち込んで翻訳する必要あり  
+    npm install @types/superagent  
+   
+### 参考サイト
+   <a href="https://visionmedia.github.io/superagent/">superAgentの公式ページ</a>

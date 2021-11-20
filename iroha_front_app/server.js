@@ -18,7 +18,7 @@ const pg = require('./server/pg');
 /**
  * テスト用のAPI
  */
-app.get('api/test', (req, res) => {
+app.get('/api/test', (req, res) => {
     // DBの実行
     const result = pg();
     console.log('取得結果：', result);

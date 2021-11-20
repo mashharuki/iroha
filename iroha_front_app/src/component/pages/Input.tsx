@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "@material-ui/core";
 import Input2 from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
+import superAgent from 'superagent';
 
 function Input():ReactElement {
     // ステート変数
@@ -16,7 +17,29 @@ function Input():ReactElement {
     const [ adds, setAdds ] = useState('')
     const [ tel, setTel ] = useState('')
     const [ bd, setBd ] = useState('')
+    const [ values, setValues ] = useState([accountId, name, kana, adds, tel, bd])
     const classes = UseStyles()
+    const baseUrl = "http://localhost:30001"
+
+    /**
+     * 登録用のAPIを呼び出してアカウント情報を登録する。
+     */
+    const inputAction = ():void => {
+        // 登録用のAPIを呼び出す。
+        superAgent
+            .get(baseUrl + '/api/test')
+            // .query(values) //パラメータがある場合は、指定する。
+            .end((err, res) => {
+                if (err) {
+                    console.log("API呼び出し中に失敗", err)
+                    return err;
+                }
+                // 結果を取得する。
+                const r = res.body;
+                console.log("API呼び出し結果：", r);
+            });
+        return
+    }
 
     return (
         <div className="App">
@@ -68,7 +91,7 @@ function Input():ReactElement {
                 className={classes.textField}
                 onChange={ (e:any) => setBd(e.target.value) } 
             /><br/><br/>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={inputAction}>
                 登録
             </Button>
             <br/>
