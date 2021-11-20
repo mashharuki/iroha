@@ -2,9 +2,7 @@
  * DB接続用のモジュール
  */
 
-const e = require('express');
-
-const pg = async function (query, values) {
+const execute = async function (query, values) {
     const { Client } = require('pg');
     // DB接続用の初期設定
     const client = new Client({
@@ -46,4 +44,4 @@ const pg = async function (query, values) {
     }
 }
 
-module.exports = { pg };
+module.exports = { execute };
