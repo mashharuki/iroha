@@ -30,7 +30,10 @@ function Input():ReactElement {
         // SQLにセットするパラメータ
         const values2:any[] = [] 
         // API用のパラメータ変数
-        const params = { query, values2 };
+        const params = { 
+            query: query, 
+            values: values2 
+        };
         // 登録用のAPIを呼び出す。
         superAgent
             .get(baseUrl + '/api/test')

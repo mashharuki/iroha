@@ -21,7 +21,7 @@ const pgHelper = require('./server/pgHelper');
 app.get('/api/test', (req, res) => {
     // SQL文
     const query = req.query.query;
-    const values = req.query.values2;
+    const values = req.query.values;
     // DBの実行
     const result = pgHelper.execute(query, values);
     console.log('取得結果：', result);
