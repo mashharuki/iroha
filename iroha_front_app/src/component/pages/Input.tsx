@@ -19,7 +19,7 @@ function Input():ReactElement {
     const [ bd, setBd ] = useState('')
     const [ values, setValues ] = useState([accountId, name, kana, adds, tel, bd])
     const classes = UseStyles()
-    const baseUrl = "http://localhost:30001"
+    const baseUrl = "http://localhost:3001"
 
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
