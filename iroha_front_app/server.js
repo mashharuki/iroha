@@ -23,10 +23,14 @@ app.get('/api/test', (req, res) => {
     const query = req.query.query;
     const values = req.query.values;
     // DBの実行
-    const result = pgHelper.execute(query, values);
-    console.log('取得結果：', result);
-    // 結果を返却する。
-    return result;
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('取得結果：', docs);
+        res.json({ roles: docs });
+    });
 });
 
 // 静的ファイルを自動的に返すようルーティングする。

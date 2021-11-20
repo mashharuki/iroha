@@ -2,7 +2,7 @@
  * DB接続用のモジュール
  */
 
-const execute = function (query, values) {
+const execute = function (query, values, callback) {
     const { Client } = require('pg');
     // DB接続用の初期設定
     const client = new Client({
@@ -24,22 +24,20 @@ const execute = function (query, values) {
             .then((res) => {
                 console.log(res.rows[0]);
                 client.end();
-                return res;
+                callback(null, res)
             })
             .catch((e) => {
-                console.error(e.stack);
-                return e;
+                return callback(e.stack, null);
             });
     } else {
         client.query(query, values)
             .then((res) => {
                 console.log(res.rows[0]);
                 client.end();
-                return res;
+                callback(null, res)
             })
             .catch((e) => {
-                console.error(e.stack);
-                return e;
+                return callback(e.stack, null);
             });
     }
 }
