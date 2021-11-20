@@ -10,7 +10,7 @@ function pg () {
         host: '127.0.0.1',
         database: 'iroha_default',
         password: 'mysecretpassword',
-        port: 5432,
+        port: 15432,
     })
 
     client.connect()

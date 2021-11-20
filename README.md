@@ -183,7 +183,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
    `psql -U postgres iroha_default`  
 
-   `CREATE DATABSE reidai;`  
+   `CREATE DATABASE reidai;`  
 
    `CREATE TABLE kaiin_info (  
       no serial,   
