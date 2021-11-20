@@ -19,7 +19,7 @@ const execute = function (query, values) {
     console.log('パラメータの中身：', values);
 
     // パラメータの変数の有無で処理を分岐する。
-    if (values.length == 0) {
+    if (typeof values === "undefined") {
         client.query(query)
             .then((res) => {
                 console.log(res.rows[0]);
