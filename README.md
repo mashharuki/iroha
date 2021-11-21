@@ -221,6 +221,9 @@ Hyperledger Irohaを学習するためのリポジトリです。
    `irohad --config config.docker --genesis_block genesis.block --keypair_name node1`  
    `irohad --config config.docker --genesis_block genesis.block --keypair_name node2`  
 
+### 初期化するとき
+    -overwrite_ledger true をつけること！
+
 ### iroha-cliの起動コマンド(admin@test.pubファイルが存在するディレクトリで打ちこむ)
    `iroha-cli -account_name admin@test`  
 
