@@ -1,6 +1,9 @@
-// キーペア作成コンポーネント
+/**
+ * キーペア作成コンポーネント
+ * @returns 生成したアカウントの公開鍵
+ */
 
-function Keycreate (): void {
+function Keycreate (): string {
   // ドメイン名
   let DOMAIN:string  = process.argv[2]   
   // アカウント名
@@ -48,6 +51,7 @@ function Keycreate (): void {
       throw err
     }
   })
+  return public_key;
 }
 
 export default Keycreate

@@ -18,9 +18,10 @@ const pgHelper = require('./server/pgHelper');
 /**
  * テスト用のAPI
  */
-app.get('/api/test', (req, res) => {
-    // SQL文
-    const query = req.query.query;
+app.get('/api/input', (req, res) => {
+    // 実行するSQL
+    const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)'
+    // パラメータ
     const values = req.query.values;
     // DBの実行
     pgHelper.execute(query, values, (err, docs) => {
@@ -28,8 +29,8 @@ app.get('/api/test', (req, res) => {
             console.log(err.toString());
             return;
         }
-        console.log('取得結果：', docs.rows);
-        res.json({ roles: docs.rows });
+        console.log('取得結果：', docs);
+        // res.json({ roles: docs.rows });
     });
 });
 

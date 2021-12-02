@@ -8,35 +8,105 @@ import { Button } from "@material-ui/core";
 import Input2 from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
+import Keycreate from "../iroha/Keycreate";
+import { 
+    CommandService_v1Client as CommandService,
+    QueryService_v1Client as QueryService
+} from 'iroha-helpers-ts/lib/proto/endpoint_pb_service'
+import queries from 'iroha-helpers-ts/lib/queries'
+import commands from 'iroha-helpers-ts/lib/commands'
 
+/**
+ *  Inputコンポーネント
+ */
 function Input():ReactElement {
     // ステート変数
+    const [ domain, setDomain ] = useState('nihon')
     const [ accountId, setAccoutId ] = useState('')
     const [ name, setName ] = useState('')
     const [ kana, setKana ] = useState('')
     const [ adds, setAdds ] = useState('')
     const [ tel, setTel ] = useState('')
     const [ bd, setBd ] = useState('')
-    const [ values, setValues ] = useState([accountId, name, kana, adds, tel, bd])
+    const [ ed, setEd ] = useState('')
+    const [ block, setBlock ] = useState('')
+    const [ values, setValues ] = useState([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block])
+    // スタイルコンポーネント用の変数
     const classes = UseStyles()
+    // APIサーバーのURL
     const baseUrl = "http://localhost:3001"
+    // Hyperleder Iroha用のアドレス情報
+    const IROHA_ADDRESS = 'localhost:50051'
+    // adminのアカウントと秘密鍵情報(開発用)
+    const adminId = 'admin@test'
+    const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70'
+    // コマンドを利用するためのインスタンスを生成
+    const commandService = new CommandService(IROHA_ADDRESS)
+    // クエリを利用するためのインスタンスを生成
+    const queryService = new QueryService(IROHA_ADDRESS)
+
+    // 生成したブロック情報を取得する設定
+    queries.fetchCommits({
+            privateKey: adminPriv,
+            creatorAccountId: adminId,
+            queryService,
+            timeoutLimit: 5000
+        },
+        (bk) => {
+            console.log('fetchCommits new block:', bk)
+            // ブロック高の情報が存在する場合は、ブロック高の値をセットする。
+            if (bk.match(/height: (\d+),/) !== null){
+                // ステート変数に値を詰める。
+                setBlock(bk.match(/height: (\d+),/)[1])
+            }
+        },
+        (error) => console.error('fetchCommits failed:', error.stack)
+    )
+    
+
+    /**
+     * アカウント作成関数
+     */
+    const createAcount = async ():Promise<any> => {
+         // 現在日付を取得する。
+        let dt = new Date()                    
+        const year = dt.getFullYear() + 3     
+        const month = dt.getMonth() + 1         
+        const date = dt.getDate()               
+        // 期限を生成して変数にセット
+        setEd(year + '/' + month + '/' + date)
+        // 鍵ペアを作成する。
+        const publicKey = Keycreate();
+        // アカウント作成
+        Promise.all([
+            // createAccountコマンドを呼び出す。
+            commands.createAccount({
+                privateKeys: [adminPriv],
+                creatorAccountId: adminId,
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000
+            },{
+                accountName: accountId,
+                domainId: domain,
+                publicKey: publicKey
+            })
+        ])
+        .then(a => console.log("アカウント作成成功：", a))
+        .catch(e => console.error("アカウント作成失敗：", e))
+    }
 
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
      */
     const inputAction = ():any => {
-        // 実行するSQL
-        const query:string = 'SELECT * FROM role'
-        // SQLにセットするパラメータ
-        const values2:any[] = [] 
+        // ブロックチェーン上にアカウント情報を作成する。
+        createAcount();
         // API用のパラメータ変数
-        const params = { 
-            query: query, 
-            values: values2 
-        };
+        const params = { values: values };
         // 登録用のAPIを呼び出す。
         superAgent
-            .get(baseUrl + '/api/test')
+            .get(baseUrl + '/api/input')
             .query(params) 
             .end((err, res) => {
                 if (err) {
@@ -44,8 +114,8 @@ function Input():ReactElement {
                     return err;
                 }
                 // 結果を取得する。
-                const r = res.body.rows;
-                console.log("API呼び出し結果：", r);
+                // const r = res.body.rows;
+                console.log("API呼び出し結果：", res);
             });
         return
     }
