@@ -44,9 +44,21 @@ function Input():ReactElement {
     const commandService = new CommandService(IROHA_ADDRESS)
     // クエリを利用するためのインスタンスを生成
     const queryService = new QueryService(IROHA_ADDRESS)
+    
+    /**
+     * アカウント作成関数
+     */
+    const createAcount = ():any => {
+         // 現在日付を取得する。
+        let dt = new Date()                    
+        const year = dt.getFullYear() + 3     
+        const month = dt.getMonth() + 1         
+        const date = dt.getDate()               
+        // 期限を生成して変数にセット
+        setEd(year + '/' + month + '/' + date)
 
-    // 生成したブロック情報を取得する設定
-    queries.fetchCommits({
+        // 生成したブロック情報を取得する設定
+        queries.fetchCommits({
             privateKey: adminPriv,
             creatorAccountId: adminId,
             queryService,
@@ -60,21 +72,8 @@ function Input():ReactElement {
                 setBlock(bk.match(/height: (\d+),/)[1])
             }
         },
-        (error) => console.error('fetchCommits failed:', error.stack)
-    )
-    
-
-    /**
-     * アカウント作成関数
-     */
-    const createAcount = async ():Promise<any> => {
-         // 現在日付を取得する。
-        let dt = new Date()                    
-        const year = dt.getFullYear() + 3     
-        const month = dt.getMonth() + 1         
-        const date = dt.getDate()               
-        // 期限を生成して変数にセット
-        setEd(year + '/' + month + '/' + date)
+        (error) => console.error('fetchCommits failed:', error.stack))
+        
         // 鍵ペアを作成する。
         const publicKey = Keycreate();
         // アカウント作成
@@ -99,9 +98,9 @@ function Input():ReactElement {
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
      */
-    const inputAction = ():any => {
+    const inputAction = async():Promise<any> => {
         // ブロックチェーン上にアカウント情報を作成する。
-        createAcount();
+        await createAcount();
         // API用のパラメータ変数
         const params = { values: values };
         // 登録用のAPIを呼び出す。
