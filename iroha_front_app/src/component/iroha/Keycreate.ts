@@ -38,7 +38,7 @@ function Keycreate (): string {
 
   // console.log('public Key :', public_key)   
   // console.log('private Key:', private_key)  
-
+  
   //公開鍵をファイルに書き出し
   fs.writeFile(KEY_DIR + ACCOUNT + '@' + DOMAIN + '.pub', public_key , function (err:any) {
     if (err) {

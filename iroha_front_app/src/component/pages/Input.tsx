@@ -8,7 +8,6 @@ import { Button } from "@material-ui/core";
 import Input2 from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
-import Keycreate from "../iroha/Keycreate";
 import { 
     CommandService_v1Client as CommandService,
     QueryService_v1Client as QueryService
@@ -74,9 +73,22 @@ function Input():ReactElement {
         },
         (error) => console.error('fetchCommits failed:', error.stack))
         
-        // 鍵ペアを作成する。
-        const publicKey = Keycreate();
-        // アカウント作成
+        // 公開鍵用の変数を用意する。
+        let publicKey = '';
+        // APIを呼び出して公開鍵を取得する。
+        superAgent
+            .get(baseUrl + '/api/publicKey')
+            .end((err, res) => {
+                if (err) {
+                    console.log("API呼び出し中に失敗", err)
+                    return err;
+                }
+                // 結果を取得する。
+                publicKey = res.body.rows["publicKey"];
+                console.log("API呼び出し結果：", publicKey);
+            });
+
+        // アカウント作成処理
         Promise.all([
             // createAccountコマンドを呼び出す。
             commands.createAccount({

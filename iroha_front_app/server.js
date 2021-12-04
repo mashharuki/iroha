@@ -13,10 +13,43 @@ app.listen(portNo, () => {
 });
 // DB接続用のモジュールを読みこむ
 const pgHelper = require('./server/pgHelper');
+// 鍵生成用のモジュールを読み込む
+const Keycreate = require('./server/KeyCreate');
 
 // APIの定義
+
 /**
- * テスト用のAPI
+ * テスト用API
+ */
+ app.get('/api/test', (req, res) => {
+    // SQL文
+    const query = req.query.query;
+    const values = req.query.values;
+    // DBの実行
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('取得結果：', docs.rows);
+        res.json({ roles: docs.rows });
+    });
+});
+
+/**
+ * キーペアを生成し、公開鍵を取得するためのAPI
+ */
+ app.get('/api/publickey', (req, res) => {
+    // 公開鍵用の変数
+    let publicKey ='';
+    // 公開鍵を取得する。
+    publicKey = Keycreate();
+    console.log("publicKey:", publicKey);
+    res.json({ publicKey: publicKey });
+ });
+
+/**
+ * 新規会員情報を挿入するためのAPI
  */
 app.get('/api/input', (req, res) => {
     // 実行するSQL
@@ -31,24 +64,6 @@ app.get('/api/input', (req, res) => {
         }
         console.log('取得結果：', docs);
         // res.json({ roles: docs.rows });
-    });
-});
-
-/**
- * アカウント新規登録処理用API
- */
-app.get('/api/input', (req, res) => {
-    // SQL文
-    const query = req.query.query;
-    const values = req.query.values;
-    // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
-        if (err) {
-            console.log(err.toString());
-            return;
-        }
-        console.log('取得結果：', docs.rows);
-        res.json({ roles: docs.rows });
     });
 });
 
