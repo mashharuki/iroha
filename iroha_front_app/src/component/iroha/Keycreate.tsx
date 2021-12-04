@@ -3,6 +3,8 @@
  * @returns 生成したアカウントの公開鍵
  */
 
+import * as fs from 'fs'
+
 function Keycreate (): string {
   // ドメイン名
   let DOMAIN:string  = process.argv[2]   
@@ -13,8 +15,7 @@ function Keycreate (): string {
   let public_key:string = ''            
   // 秘密鍵を格納(初期化)
   let private_key:string = ''            
-
-  let fs = require('fs')          
+          
   // キーペアのディレクトリ
   const KEY_DIR:string = '/home/haruki/git/iroha/example/' 
 
@@ -35,8 +36,8 @@ function Keycreate (): string {
     private_key = private_key + priv[i].toString(16).padStart(2, '0')
   }
 
-  console.log('public Key :', public_key)   // public key をコンソールに出力
-  console.log('private Key:', private_key)  // private key をコンソールに出力
+  // console.log('public Key :', public_key)   
+  // console.log('private Key:', private_key)  
 
   //公開鍵をファイルに書き出し
   fs.writeFile(KEY_DIR + ACCOUNT + '@' + DOMAIN + '.pub', public_key , function (err:any) {
