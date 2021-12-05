@@ -54,4 +54,4 @@ function Keycreate () {
     return public_key;
 }
  
- export default Keycreate
+module.exports = { Keycreate };
