@@ -3,7 +3,7 @@
  * @returns 生成したアカウントの公開鍵
  */
 
-import * as fs from 'fs'
+import fs from 'fs'
 
 function Keycreate () {
     // ドメイン名
