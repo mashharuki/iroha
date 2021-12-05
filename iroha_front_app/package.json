@@ -29,6 +29,7 @@
     "react-router-dom": "^6.0.1",
     "react-scripts": "4.0.3",
     "superagent": "^6.1.0",
+    "ts-protoc-gen": "^0.15.0",
     "typescript": "^4.4.4",
     "web-vitals": "^1.1.2"
   },

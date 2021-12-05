@@ -60,7 +60,7 @@ function Input():ReactElement {
             privateKey: adminPriv,
             creatorAccountId: adminId,
             queryService,
-            timeoutLimit: 5000
+            timeoutLimit: 7000
         },
         (bk) => {
             console.log('fetchCommits new block:', bk)
