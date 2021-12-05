@@ -3,9 +3,8 @@
  * @returns 生成したアカウントの公開鍵
  */
 
-import fs from 'fs'
-
 function Keycreate () {
+    const fs = require('fs');
     // ドメイン名
     let DOMAIN  = process.argv[2]   
     // アカウント名
