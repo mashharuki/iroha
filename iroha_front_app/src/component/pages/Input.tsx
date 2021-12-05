@@ -29,16 +29,6 @@ function Input():ReactElement {
     const [ bd, setBd ] = useState('')
     const [ ed, setEd ] = useState('')
     const [ block, setBlock ] = useState('')
-    const [ values, setValues ] = useState({
-        accountId : accountId + '@' + domain, 
-        name: name, 
-        kana: kana, 
-        adds: adds, 
-        tel: tel, 
-        bd: bd, 
-        ed: ed, 
-        block: block
-    })
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
@@ -114,18 +104,6 @@ function Input():ReactElement {
         ])
         .then(a => {
             console.log("アカウント作成成功：", a);
-            // パラメータ情報をセットする。
-            setValues({
-                ...values,
-                accountId: accountId + '@' + domain, 
-                name: name, 
-                kana: kana, 
-                adds: adds, 
-                tel: tel, 
-                bd: bd, 
-                ed: ed, 
-                block: block
-            });
         })
         .catch(e => console.error("アカウント作成失敗：", e))
     }
@@ -136,8 +114,10 @@ function Input():ReactElement {
     const inputAction = async():Promise<any> => {
         // ブロックチェーン上にアカウント情報を作成する。
         await createAcount();
+        // パラメータ用の配列を作成する。
+        const values = [ accountId + '@' + domain, name, kana, adds, tel, bd, ed, block ];
         // API用のパラメータ変数
-        const params = { values: [values] };
+        const params = { values: values };
         // 登録用のAPIを呼び出す。
         superAgent
             .get(baseUrl + '/api/input')
