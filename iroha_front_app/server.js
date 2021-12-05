@@ -45,7 +45,7 @@ const Keycreate = require('./server/KeyCreate');
     // 公開鍵を取得する。
     publicKey = Keycreate.Keycreate();
     console.log("publicKey:", publicKey);
-    res.json({ publicKey: publicKey });
+    res.send(publicKey);
  });
 
 /**

@@ -84,8 +84,8 @@ function Input():ReactElement {
                     return err;
                 }
                 // 結果を取得する。
-                publicKey = res.body.rows["publicKey"];
-                console.log("API呼び出し結果：", publicKey);
+                // publicKey = res.body.rows["publicKey"];
+                console.log("API呼び出し結果：", res.body);
             });
 
         // アカウント作成処理
@@ -105,6 +105,8 @@ function Input():ReactElement {
         ])
         .then(a => console.log("アカウント作成成功：", a))
         .catch(e => console.error("アカウント作成失敗：", e))
+        // パラメータ情報をセットする。
+        setValues([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block]);
     }
 
     /**
@@ -113,8 +115,6 @@ function Input():ReactElement {
     const inputAction = async():Promise<any> => {
         // ブロックチェーン上にアカウント情報を作成する。
         await createAcount();
-        // パラメータ情報をセットする。
-        setValues([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block]);
         // API用のパラメータ変数
         const params = { values: values };
         // 登録用のAPIを呼び出す。
