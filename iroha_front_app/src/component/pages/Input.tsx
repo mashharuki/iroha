@@ -84,8 +84,7 @@ function Input():ReactElement {
                     return err;
                 }
                 // 結果を取得する。
-                // publicKey = res.body.rows["publicKey"];
-                console.log("API呼び出し結果：", res.body);
+                console.log("API呼び出し結果：", res.body.publicKey);
             });
 
         // アカウント作成処理

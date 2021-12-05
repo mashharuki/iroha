@@ -223,7 +223,6 @@ Hyperledger Irohaを学習するためのリポジトリです。
 
 ### 初期化するとき
     -overwrite_ledger true をつけること！
-
 ### iroha-cliの起動コマンド(admin@test.pubファイルが存在するディレクトリで打ちこむ)
    `iroha-cli -account_name admin@test`  
 
