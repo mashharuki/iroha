@@ -28,7 +28,7 @@ function Input():ReactElement {
     const [ tel, setTel ] = useState('')
     const [ bd, setBd ] = useState('')
     const [ ed, setEd ] = useState('')
-    const [ block, setBlock ] = useState('')
+    const [ block, setBlock ] = useState(0)
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
