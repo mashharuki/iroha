@@ -29,7 +29,16 @@ function Input():ReactElement {
     const [ bd, setBd ] = useState('')
     const [ ed, setEd ] = useState('')
     const [ block, setBlock ] = useState('')
-    const [ values, setValues ] = useState([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block])
+    const [ values, setValues ] = useState({
+        accountId : accountId + '@' + domain, 
+        name: name, 
+        kana: kana, 
+        adds: adds, 
+        tel: tel, 
+        bd: bd, 
+        ed: ed, 
+        block: block
+    })
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
@@ -85,6 +94,7 @@ function Input():ReactElement {
                 }
                 // 結果を取得する。
                 console.log("API呼び出し結果：", res.body.publicKey);
+                publicKey = res.body.publicKey;
             });
 
         // アカウント作成処理
@@ -102,10 +112,22 @@ function Input():ReactElement {
                 publicKey: publicKey
             })
         ])
-        .then(a => console.log("アカウント作成成功：", a))
+        .then(a => {
+            console.log("アカウント作成成功：", a);
+            // パラメータ情報をセットする。
+            setValues({
+                ...values,
+                accountId: accountId + '@' + domain, 
+                name: name, 
+                kana: kana, 
+                adds: adds, 
+                tel: tel, 
+                bd: bd, 
+                ed: ed, 
+                block: block
+            });
+        })
         .catch(e => console.error("アカウント作成失敗：", e))
-        // パラメータ情報をセットする。
-        setValues([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block]);
     }
 
     /**
@@ -115,7 +137,7 @@ function Input():ReactElement {
         // ブロックチェーン上にアカウント情報を作成する。
         await createAcount();
         // API用のパラメータ変数
-        const params = { values: values };
+        const params = { values: [values] };
         // 登録用のAPIを呼び出す。
         superAgent
             .get(baseUrl + '/api/input')
