@@ -45,8 +45,9 @@ function Input():ReactElement {
     
     /**
      * アカウント作成関数
+     * @param publicKey 作成した公開鍵
      */
-    const createAcount = ():any => {
+    const createAcount = (publicKey:string):any => {
          // 現在日付を取得する。
         let dt = new Date()                    
         const year = dt.getFullYear() + 3     
@@ -72,21 +73,6 @@ function Input():ReactElement {
         },
         (error) => console.error('fetchCommits failed:', error.stack))
         
-        // 公開鍵用の変数を用意する。
-        let publicKey = '';
-        // APIを呼び出して公開鍵を取得する。
-        superAgent
-            .get(baseUrl + '/api/publicKey')
-            .end((err, res) => {
-                if (err) {
-                    console.log("API呼び出し中に失敗", err)
-                    return err;
-                }
-                // 結果を取得する。
-                console.log("API呼び出し結果：", res.body.publicKey);
-                publicKey = res.body.publicKey;
-            });
-
         // アカウント作成処理
         Promise.all([
             // createAccountコマンドを呼び出す。
@@ -112,8 +98,23 @@ function Input():ReactElement {
      * 登録用のAPIを呼び出してアカウント情報を登録する。
      */
     const inputAction = async():Promise<any> => {
+        // 公開鍵用の変数を用意する。
+        let publicKey = '';
+        // APIを呼び出して公開鍵を取得する。
+        superAgent
+            .get(baseUrl + '/api/publicKey')
+            .end((err, res) => {
+                if (err) {
+                    console.log("API呼び出し中に失敗", err)
+                    return err;
+                }
+                // 結果を取得する。
+                console.log("API呼び出し結果：", res.body.publicKey);
+                publicKey = res.body.publicKey;
+            });
+
         // ブロックチェーン上にアカウント情報を作成する。
-        await createAcount();
+        await createAcount(publicKey);
         // パラメータ用の配列を作成する。
         const values = [ accountId + '@' + domain, name, kana, adds, tel, bd, ed, block ];
         // API用のパラメータ変数
