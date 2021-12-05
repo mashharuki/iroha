@@ -3,7 +3,7 @@
  * @returns 生成したアカウントの公開鍵
  */
 
-function Keycreate () {
+const Keycreate = function () {
     const fs = require('fs');
     // ドメイン名
     let DOMAIN  = process.argv[2]   
@@ -52,6 +52,6 @@ function Keycreate () {
         }
     })
     return public_key;
-}
+};
  
 module.exports = { Keycreate };

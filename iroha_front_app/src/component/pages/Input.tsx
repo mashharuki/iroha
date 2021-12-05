@@ -113,6 +113,8 @@ function Input():ReactElement {
     const inputAction = async():Promise<any> => {
         // ブロックチェーン上にアカウント情報を作成する。
         await createAcount();
+        // パラメータ情報をセットする。
+        setValues([accountId + '@' + domain, name, kana, adds, tel, bd, ed, block]);
         // API用のパラメータ変数
         const params = { values: values };
         // 登録用のAPIを呼び出す。
