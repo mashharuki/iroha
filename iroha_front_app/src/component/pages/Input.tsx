@@ -38,7 +38,7 @@ function Input():ReactElement {
         const month = dt.getMonth() + 1         
         const date = dt.getDate()               
         // 期限を生成して変数にセット
-        setEd(year + '/' + month + '/' + date)
+        setEd(year + '/' + month + '/' + date);
         // API用のパラメータ変数
         const params = { 
             domain: domain,
