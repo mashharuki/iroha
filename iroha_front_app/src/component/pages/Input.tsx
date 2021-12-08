@@ -36,7 +36,7 @@ function Input():ReactElement {
         const year = dt.getFullYear() + 3     
         const month = dt.getMonth() + 1         
         const date = dt.getDate()       
-        let edate = year + '/' + month + '/' + date;        
+        let edate = year.toString() + '/' + month.toString() + '/' + date.toString();        
         // 期限を生成して変数にセット
         setEd(edate);
         console.log("期限：", ed);
