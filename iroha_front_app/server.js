@@ -2,13 +2,10 @@
  * Hyperledger Iroha用のサーバー設定ファイル
  */
 
-import grpc from 'grpc';
-import {
-    QueryService_v1Client as QueryService,
-    CommandService_v1Client as CommandService
-} from 'iroha-helpers/lib/proto/endpoint_grpc_pb';
-import queries from 'iroha-helpers-ts/lib/queries';
-import commands from 'iroha-helpers-ts/lib/commands';
+const grpc = require('@grpc/grpc-js');
+const { QueryService_v1Client, CommandService_v1Client } = require('iroha-helpers/lib/proto/endpoint_grpc_pb');
+const queries = require('iroha-helpers-ts/lib/queries');
+const commands = require('iroha-helpers-ts/lib/commands');
 
 // Webサーバーの起動
 const express = require('express');
@@ -29,9 +26,9 @@ const IROHA_ADDRESS = 'localhost:50051'
 const adminId = 'admin@test'
 const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70'
 // コマンドを利用するためのインスタンスを生成
-const commandService = new CommandService(IROHA_ADDRESS, grpc.credentials.createInsecure());
+const commandService = new CommandService_v1Client(IROHA_ADDRESS, grpc.credentials.createInsecure());
 // クエリを利用するためのインスタンスを生成
-const queryService = new QueryService(IROHA_ADDRESS, grpc.credentials.createInsecure());
+const queryService = new QueryService_v1Client(IROHA_ADDRESS, grpc.credentials.createInsecure());
 
 // APIの定義
 
