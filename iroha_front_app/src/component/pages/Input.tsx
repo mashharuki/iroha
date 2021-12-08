@@ -22,7 +22,6 @@ function Input():ReactElement {
     const [ tel, setTel ] = useState('')
     const [ bd, setBd ] = useState('')
     const [ ed, setEd ] = useState('')
-    const [ block, setBlock ] = useState(0)
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
@@ -36,9 +35,11 @@ function Input():ReactElement {
         let dt = new Date()                    
         const year = dt.getFullYear() + 3     
         const month = dt.getMonth() + 1         
-        const date = dt.getDate()               
+        const date = dt.getDate()       
+        let edate = year + '/' + month + '/' + date;        
         // 期限を生成して変数にセット
-        setEd(year + '/' + month + '/' + date);
+        setEd(edate);
+        console.log("期限：", ed);
         // API用のパラメータ変数
         const params = { 
             domain: domain,

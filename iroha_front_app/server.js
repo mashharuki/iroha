@@ -80,7 +80,7 @@ app.get('/api/input', (req, res) => {
     // ブロック用の変数
     let block = 0;
     // 生成したブロック情報を取得する設定
-    queries.fetchCommits({
+    queries.queries.fetchCommits({
         privateKey: adminPriv,
         creatorAccountId: adminId,
         queryService,
