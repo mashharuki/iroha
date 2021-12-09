@@ -2,11 +2,11 @@
  * アカウント作成処理用コンポーネントファイル
  */
 
-const grpc = require('@grpc/grpc-js');
-const grpc2 = require('grpc');
-const { QueryService_v1Client, CommandService_v1Client } = require('iroha-helpers/lib/proto/endpoint_grpc_pb');
-const queries = require('iroha-helpers-ts/lib/queries/index');
-const commands = require('iroha-helpers-ts/lib/commands/index');
+import grpc from '@grpc/grpc-js';
+import grpc2 from 'grpc';
+import { QueryService_v1Client, CommandService_v1Client } from 'iroha-helpers/lib/proto/endpoint_grpc_pb';
+import queries from 'iroha-helpers-ts/lib/queries/index';
+import commands from 'iroha-helpers-ts/lib/commands/index';
 
 // Hyperleder Iroha用のアドレス情報
 const IROHA_ADDRESS = 'localhost:50051'

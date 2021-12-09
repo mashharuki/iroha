@@ -16,7 +16,7 @@ const pgHelper = require('./server/pgHelper');
 // 鍵生成用のモジュールを読み込む
 const Keycreate = require('./server/KeyCreate');
 // アカウント作成用のモジュールを読み込む
-const CreateAccount = require('./server/CreateAccount');
+const CreateAccount = require('./server/CreateAccountCall');
 
 // APIの定義
 
