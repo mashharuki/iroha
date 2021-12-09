@@ -83,7 +83,7 @@ app.get('/api/input', (req, res) => {
     queries.fetchCommits({
         privateKey: adminPriv,
         creatorAccountId: adminId,
-        queryService,
+        queryService
     },
     (bk) => {
         console.log('fetchCommits new block:', bk)
