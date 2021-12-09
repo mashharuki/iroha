@@ -36,7 +36,8 @@ function Input():ReactElement {
         const year = dt.getFullYear() + 3     
         const month = dt.getMonth() + 1         
         const date = dt.getDate()       
-        let edate = year.toString() + '/' + month.toString() + '/' + date.toString();        
+        let edate = year.toString() + '/' + month.toString() + '/' + date.toString();  
+        console.log("期限：", edate);      
         // 期限を生成して変数にセット
         setEd(edate);
         console.log("期限：", ed);
@@ -49,7 +50,7 @@ function Input():ReactElement {
             adds: adds, 
             tel: tel, 
             bd: bd, 
-            ed: ed, 
+            ed: edate, 
         };
 
         // 登録用のAPIを呼び出す。

@@ -5,8 +5,8 @@
 const grpc = require('@grpc/grpc-js');
 const grpc2 = require('grpc');
 const { QueryService_v1Client, CommandService_v1Client } = require('iroha-helpers/lib/proto/endpoint_grpc_pb');
-const queries = require('iroha-helpers-ts/lib/queries');
-const commands = require('iroha-helpers-ts/lib/commands');
+const queries = require('iroha-helpers-ts/lib/queries/index');
+const commands = require('iroha-helpers-ts/lib/commands/index');
 
 // Webサーバーの起動
 const express = require('express');
@@ -80,11 +80,10 @@ app.get('/api/input', (req, res) => {
     // ブロック用の変数
     let block = 0;
     // 生成したブロック情報を取得する設定
-    queries.queries.fetchCommits({
+    queries.fetchCommits({
         privateKey: adminPriv,
         creatorAccountId: adminId,
         queryService,
-        timeoutLimit: 7000
     },
     (bk) => {
         console.log('fetchCommits new block:', bk)
