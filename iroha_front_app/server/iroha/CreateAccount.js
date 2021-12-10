@@ -10,15 +10,15 @@ import commands from 'iroha-helpers/lib/commands/index';
 
 let util = require('util');
 // コマンドの引数から取得する。
-let domain = process.argv[2]   
-let accountId = process.argv[3]  
-let publicKey = process.argv[4]
+let domain = process.argv[2];
+let accountId = process.argv[3];
+let publicKey = process.argv[4];
 
 // Hyperleder Iroha用のアドレス情報
-const IROHA_ADDRESS = 'localhost:50051'
+const IROHA_ADDRESS = 'localhost:51051';
 // adminのアカウントと秘密鍵情報(開発用)
-const adminId = 'admin@test'
-const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70'
+const adminId = 'admin@test';
+const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70';
 // コマンドを利用するためのインスタンスを生成
 const commandService = new CommandService_v1Client(IROHA_ADDRESS, grpc2.credentials.createInsecure());
 // クエリを利用するためのインスタンスを生成
