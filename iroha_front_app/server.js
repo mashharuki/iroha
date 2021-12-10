@@ -1,5 +1,5 @@
 /**
- * Hyperledger Iroha用のサーバー設定ファイル
+ * Hyperledger Iroha用のAPIサーバー設定ファイル
  */
 
 // Webサーバーの起動
@@ -12,7 +12,7 @@ app.listen(portNo, () => {
     console.log('起動しました', `http://localhost:${portNo}`)
 });
 // 外部プロセス呼び出し用に使用する。
-let exec = require('child_process').exec 
+let exec = require('child_process').exec;
 // DB接続用のモジュールを読みこむ
 const pgHelper = require('./server/pgHelper');
 // 鍵生成用のモジュールを読み込む
