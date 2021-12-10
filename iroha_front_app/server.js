@@ -11,12 +11,12 @@ const portNo = 3001;
 app.listen(portNo, () => {
     console.log('起動しました', `http://localhost:${portNo}`)
 });
+// 外部プロセス呼び出し用に使用する。
+let exec = require('child_process').exec 
 // DB接続用のモジュールを読みこむ
 const pgHelper = require('./server/pgHelper');
 // 鍵生成用のモジュールを読み込む
 const Keycreate = require('./server/KeyCreate');
-// アカウント作成用のモジュールを読み込む
-const CreateAccount = require('./server/CreateAccountCall');
 
 // APIの定義
 
@@ -62,14 +62,34 @@ app.get('/api/input', (req, res) => {
     let addr = req.query.adds;
     let bd = req.query.bd;
     let ed = req.query.ed;
+    // ブロック高用の変数を用意する。
+    let block = 0;
     // 公開鍵を取得する。
     let publicKey = Keycreate.Keycreate();
-    // ブロック用の変数
-    let block = CreateAccount.CreateAccount(accountId, domain, publicKey);
-    console.log("ブロック高：", block);
 
+    // アカウント作成用のコマンドを作成
+    let COMMAND = ['node ./server/CreateAccountCall.js', domain, accountId, publicKey];
+    COMMAND = COMMAND.join(' ');
+    console.log('Execute COMMAND=', COMMAND);
+
+    // コマンドを実行する。
+    exec( COMMAND , function(error, stdout, stderr) {
+        if (error !== null) {                
+            console.log('exec error: ' + error)
+            return
+        }
+        console.log(stdout)
+        //ブロック位置を取得
+        if (stdout.match(/height: (\d+),/) !== null){
+            block = stdout.match(/height: (\d+),/)[1];
+            console.log("block:", block);
+        } else {
+            //キーファイルより公開鍵を取得
+            block = (2^64)+1
+        }
+    });
     // 実行するSQL
-    const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)'
+    const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
     // パラメータ用の配列を作成する。
     const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
     // DBの実行
