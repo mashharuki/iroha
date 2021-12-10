@@ -24,6 +24,12 @@ const commandService = new CommandService_v1Client(IROHA_ADDRESS, grpc2.credenti
 // クエリを利用するためのインスタンスを生成
 const queryService = new QueryService_v1Client(IROHA_ADDRESS, grpc2.credentials.createInsecure());
 
+// 自動的終了するための処理
+setTimeout(() => {
+    console.log('AutoEnd!')
+    process.exit(0)
+  }, 7000);
+
 // 生成したブロック情報を取得する設定
 queries.fetchCommits({
     privateKey: adminPriv,

@@ -87,19 +87,19 @@ app.get('/api/input', (req, res) => {
             //キーファイルより公開鍵を取得
             block = (2^64)+1
         }
-    });
-    // 実行するSQL
-    const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
-    // パラメータ用の配列を作成する。
-    const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
-    // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
+        // 実行するSQL
+        const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+        // パラメータ用の配列を作成する。
+        const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
+        // DBの実行
+        pgHelper.execute(query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
             return;
         }
         console.log('実行結果：', docs);
         // res.json({ roles: docs.rows });
+    });
     });
 });
 

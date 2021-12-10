@@ -30,7 +30,7 @@ function Input():ReactElement {
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
      */
-    const inputAction = async():Promise<any> => {
+    const inputAction = () => {
         // 現在日付を取得する。
         let dt = new Date()                    
         const year = dt.getFullYear() + 3     
@@ -64,7 +64,6 @@ function Input():ReactElement {
                 }
                 console.log("API呼び出し結果：", res);
             });
-        return
     }
 
     return (
