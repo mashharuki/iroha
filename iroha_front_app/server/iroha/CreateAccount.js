@@ -2,7 +2,6 @@
  * アカウント作成処理用コンポーネントファイル
  */
 
-import grpc from '@grpc/grpc-js';
 import grpc2 from 'grpc';
 import { QueryService_v1Client, CommandService_v1Client } from 'iroha-helpers/lib/proto/endpoint_grpc_pb';
 import queries from 'iroha-helpers/lib/queries/index';

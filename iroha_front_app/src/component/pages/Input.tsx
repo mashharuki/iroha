@@ -40,7 +40,6 @@ function Input():ReactElement {
         console.log("期限：", edate);      
         // 期限を生成して変数にセット
         setEd(edate);
-        console.log("期限：", ed);
         // API用のパラメータ変数
         const params = { 
             domain: domain,
@@ -68,19 +67,14 @@ function Input():ReactElement {
 
     return (
         <div className="App">
-            <h2>
-                新規会員登録ページ
-            </h2>
-            <br/>
-            <br/>
+            <h2>新規会員登録ページ</h2><br/><br/>
             アカウント：
             <Input2
                 id="accountId" 
                 value={accountId} 
                 className={classes.textField}
                 onChange={ (e:any) => setAccoutId(e.target.value) } 
-            />
-            <br/>
+            /><br/>
             名前：
             <Input2
                 id="name" 
@@ -118,11 +112,9 @@ function Input():ReactElement {
             /><br/><br/>
             <Button variant="contained" color="secondary" onClick={inputAction}>
                 登録
-            </Button>
-            <br/>
-            <br/>
+            </Button><br/><br/>
             <Link to={{ pathname: '/'}}>
-                メインメニューに戻る
+                ホーム画面に戻る
             </Link>
         </div>
     );

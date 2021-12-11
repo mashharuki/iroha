@@ -5,4 +5,4 @@ require('@babel/register')({
     presets: [ '@babel/env' ]
   })
   
-module.exports = require('./iroha/CreateAccount');
+module.exports = require('../CreateAccount');

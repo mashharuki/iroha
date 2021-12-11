@@ -30,7 +30,6 @@ function Pay(props:any):ReactElement {
      * 副作用フック
      */
      useEffect(() => {
-        console.log("props:", location)
         // 遷移元で入力したアカウントIDの情報を取得する。
         payAccountId = location.state.accountId;
         // ステート変数をセットする。
@@ -123,10 +122,7 @@ function Pay(props:any):ReactElement {
                     プリペイ：
                 </Grid>
                 <Grid item>
-                    <Input 
-                        id="prepay"  
-                        className={classes.textField}
-                    />
+                    <Input id="prepay" className={classes.textField} />
                 </Grid>
             </Grid><br/>
             <Grid container direction="row" justifyContent="center" alignItems="center" >
@@ -134,10 +130,7 @@ function Pay(props:any):ReactElement {
                     回数券：
                 </Grid>
                 <Grid item>
-                    <Input 
-                        id="couter" 
-                        className={classes.textField}
-                    />
+                    <Input id="couter" className={classes.textField}/>
                 </Grid>
             </Grid> <br/>
             <Button variant="contained" color="secondary">

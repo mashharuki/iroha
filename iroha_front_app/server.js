@@ -14,9 +14,11 @@ app.listen(portNo, () => {
 // 外部プロセス呼び出し用に使用する。
 let exec = require('child_process').exec;
 // DB接続用のモジュールを読みこむ
-const pgHelper = require('./server/pgHelper');
+const pgHelper = require('./server/db/pgHelper');
 // 鍵生成用のモジュールを読み込む
-const Keycreate = require('./server/KeyCreate');
+const Keycreate = require('./server/key/KeyCreate');
+// 鍵取得用のモジュールを読み込む
+const GetPrivKey = require('./server/GetPrivKey');
 
 // APIの定義
 
@@ -65,10 +67,10 @@ app.get('/api/input', (req, res) => {
     // ブロック高用の変数を用意する。
     let block = 0;
     // 公開鍵を取得する。
-    let publicKey = Keycreate.Keycreate();
+    let publicKey = Keycreate.Keycreate(accountId, domain);
 
     // アカウント作成用のコマンドを作成
-    let COMMAND = ['node ./server/CreateAccountCall.js', domain, accountId, publicKey];
+    let COMMAND = ['node ./server/call/CreateAccountCall.js', domain, accountId, publicKey];
     COMMAND = COMMAND.join(' ');
     console.log('Execute COMMAND=', COMMAND);
 
@@ -107,17 +109,36 @@ app.get('/api/input', (req, res) => {
  * チャージ処理用API
  */
 app.get('/api/charge', (req, res) => {
-    // SQL文
-    const query = req.query.query;
-    const values = req.query.values;
-    // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
-        if (err) {
-            console.log(err.toString());
-            return;
+    // パラメータから値を取得する。
+    const prepay = req.query.prepay;
+    const counter = req.query.counter;
+    const total = req.query.total;
+    const accountId = req.query.accountId;
+    const domain = req.query.domain;
+    // アカウントの秘密鍵を取得する。
+    const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
+    // アカウント作成用のコマンドを作成
+    let COMMAND = ['node ./server/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId, privateKey];
+    COMMAND = COMMAND.join(' ');
+    console.log('Execute COMMAND=', COMMAND);
+
+    // ブロック高用の変数
+    let block = 0;
+    // コマンドを実行する。
+    exec( COMMAND , function(error, stdout, stderr) {
+        if (error !== null) {                
+            console.log('exec error: ' + error)
+            return
         }
-        console.log('取得結果：', docs.rows);
-        res.json({ roles: docs.rows });
+        console.log(stdout)
+        //ブロック位置を取得
+        if (stdout.match(/height: (\d+),/) !== null){
+            block = stdout.match(/height: (\d+),/)[1];
+            console.log("block:", block);
+        } else {
+            //キーファイルより公開鍵を取得
+            block = (2^64)+1
+        }
     });
 });
 

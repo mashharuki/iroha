@@ -254,7 +254,9 @@ Hyperledger Irohaを学習するためのリポジトリです。
 ### superAgentを使用する際の注意点
     superAgentは、JavaScriptのライブラリなので直接読み込もうとすると  
     怒られる。そのため次のコマンドを打ち込んで翻訳する必要あり  
-    npm install @types/superagent  
+    npm install @types/superagent   
+    ※その他のモジュールについても必要に応じて@typesをつけてインストールする必要あり。
    
 ### 参考サイト
    <a href="https://visionmedia.github.io/superagent/">superAgentの公式ページ</a>
+   <a href="https://github.com/hyperledger/iroha-javascript">Hyperledger Irohaのjavascriptライブラリのリポジトリ</a>

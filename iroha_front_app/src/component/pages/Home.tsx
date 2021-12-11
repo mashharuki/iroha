@@ -15,14 +15,17 @@ function Home():ReactElement {
     // ステート変数
     const [ chargeAccountId, setChargeAccountId ] = useState('');
     const [ payAccountId, setPayAccountId ] = useState('');
+    const [ domain, setDomain ] = useState('nihon');
     const classes = UseStyles();
     // 「チャージアカウント」ボタンを押した時の遷移先と渡す情報
     const ToCharge = { 
-        accountId: chargeAccountId 
+        accountId: chargeAccountId,
+        domain: domain,
     };
     // 「支払いアカウント」ボタンを押した時の遷移先と渡す情報
     const ToPay = { 
-        accountId: payAccountId 
+        accountId: payAccountId,
+        domain: domain,
     };
 
     return (

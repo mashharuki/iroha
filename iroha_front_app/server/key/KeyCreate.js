@@ -1,20 +1,17 @@
 /**
  * キーペア作成コンポーネント
+ * @param アカウントID
+ * @param ドメイン
  * @returns 生成したアカウントの公開鍵
  */
 
-const Keycreate = function () {
+const Keycreate = function (account, domain) {
+    // fsモジュールをインスタンス化
     const fs = require('fs');
-    // ドメイン名
-    let DOMAIN  = process.argv[2]   
-    // アカウント名
-    let ACCOUNT = process.argv[3]   
-
     // 公開鍵を格納(初期化)
     let public_key = ''            
     // 秘密鍵を格納(初期化)
-    let private_key = ''            
-            
+    let private_key = ''                   
     // キーペアのディレクトリ
     const KEY_DIR = '/home/haruki/git/iroha/example/' 
 
@@ -39,16 +36,16 @@ const Keycreate = function () {
     // console.log('private Key:', private_key)  
 
     //公開鍵をファイルに書き出し
-    fs.writeFile(KEY_DIR + ACCOUNT + '@' + DOMAIN + '.pub', public_key , function (err) {
+    fs.writeFile(KEY_DIR + account + '@' + domain + '.pub', public_key , function (err) {
         if (err) {
-        throw err
+            throw err
         }
     })
 
     //秘密鍵をファイルに書き出し
-    fs.writeFile(KEY_DIR + ACCOUNT + '@' + DOMAIN + '.priv', private_key , function (err) {
+    fs.writeFile(KEY_DIR + account + '@' + domain + '.priv', private_key , function (err) {
         if (err) {
-        throw err
+            throw err
         }
     })
     return public_key;
