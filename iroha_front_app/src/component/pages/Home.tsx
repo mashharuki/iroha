@@ -35,9 +35,7 @@ function Home():ReactElement {
             </h2>
             <Link to={{ pathname: '/input'}}>
                 １．新規会員登録
-            </Link>
-            <br/>
-            <br/>
+            </Link><br/><br/>
             チャージアカウント：　
             <Input 
                 id="chargeAccountId" 
@@ -50,9 +48,7 @@ function Home():ReactElement {
                 <Link to='/charge' state={ToCharge}>
                     ２．チャージ
                 </Link>
-            </Button>
-            <br/>
-            <br/>
+            </Button><br/><br/>
             支払いアカウント：　
             <Input 
                 id="payAccountId" 

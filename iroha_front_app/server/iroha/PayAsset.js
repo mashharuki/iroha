@@ -1,5 +1,5 @@
 /**
- * HyperledgerIroha上のアセットをチャージするためのロジックファイル
+ * 支払い処理をHyperleder Iroha上で実施するためのロジックファイル
  */
 
 import grpc from 'grpc';
@@ -15,6 +15,9 @@ let total = process.argv[4];
 let domain = process.argv[5];
 let accountId = process.argv[6];
 let privateKey = process.argv[7];
+let msg = process.argv[8];
+// アセット転送先アカウント
+const tAccountId = "user@nihon";
 
 // Hyperleder Iroha用のアドレス情報
 const IROHA_ADDRESS = 'localhost:51051';
@@ -43,26 +46,32 @@ queries.fetchCommits({
 },
 (error) => console.error('fetchCommits failed:', error.stack));
 
-// アセット加算処理
+// アセットの転送処理
 Promise.all([
-    commands.addAssetQuantity({
+    commands.transferAsset({
       privateKeys: [privateKey],
       creatorAccountId: accountId,
       quorum: 1,
       commandService,
       timeoutLimit: 5000
     }, {
-      assetId: 'prepay#' + domain,
+      srcAccountId: accountId,
+      destAccountId: tAccountId,
+      assetId: 'prepay#' + domain ,
+      description: msg ,
       amount: prepay
     }),
-    commands.addAssetQuantity({
+    commands.transferAsset({
       privateKeys: [privateKey],
       creatorAccountId: accountId,
       quorum: 1,
       commandService,
       timeoutLimit: 5000
     }, {
-      assetId: 'ticket#' + domain,
+      srcAccountId: accountId,
+      destAccountId: tAccountId,
+      assetId: 'ticket#' + domain ,
+      description: msg ,
       amount: counter
     }),
     commands.addAssetQuantity({
@@ -72,10 +81,9 @@ Promise.all([
       commandService,
       timeoutLimit: 5000
     }, {
-      assetId: 'total#' + domain,
+      assetId: 'total#' + domain ,
       amount: total
     })
 ])
 .then(a => console.log(a))
 .catch(e => console.error(e))
-  

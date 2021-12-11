@@ -95,13 +95,13 @@ app.get('/api/input', (req, res) => {
         const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
         // DBの実行
         pgHelper.execute(query, values, (err, docs) => {
-        if (err) {
-            console.log(err.toString());
-            return;
-        }
-        console.log('実行結果：', docs);
-        // res.json({ roles: docs.rows });
-    });
+            if (err) {
+                console.log(err.toString());
+                return;
+            }
+            console.log('実行結果：', docs);
+            // res.json({ roles: docs.rows });
+        });
     });
 });
 
@@ -115,10 +115,12 @@ app.get('/api/charge', (req, res) => {
     const total = req.query.total;
     const accountId = req.query.accountId;
     const domain = req.query.domain;
+    // メッセージ
+    const msg = "charge";
     // アカウントの秘密鍵を取得する。
     const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
     // アカウント作成用のコマンドを作成
-    let COMMAND = ['node ./server/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId, privateKey];
+    let COMMAND = ['node ./server/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey];
     COMMAND = COMMAND.join(' ');
     console.log('Execute COMMAND=', COMMAND);
 
@@ -139,6 +141,20 @@ app.get('/api/charge', (req, res) => {
             //キーファイルより公開鍵を取得
             block = (2^64)+1
         }
+
+        // 実行するSQL
+        const query = 'INSERT INTO shiharai_info (id,prepay,ticket,total,shisetsu,ninzu,usetime,job) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+        // パラメータ用の配列を作成する。
+        const values = [ accountId + '@' + domain, prepay, counter, total, '-', 0, 0, msg ];
+        // DBの実行
+        pgHelper.execute(query, values, (err, docs) => {
+            if (err) {
+                console.log(err.toString());
+                return;
+            }
+            console.log('実行結果：', docs);
+            // res.json({ roles: docs.rows });
+        });
     });
 });
 
@@ -146,17 +162,56 @@ app.get('/api/charge', (req, res) => {
  * 支払処理用API
  */
 app.get('/api/pay', (req, res) => {
-    // SQL文
-    const query = req.query.query;
-    const values = req.query.values;
-    // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
-        if (err) {
-            console.log(err.toString());
-            return;
+    // パラメータから値を取得する。
+    const prepay = req.query.prepay;
+    const counter = req.query.counter;
+    const total = req.query.total;
+    const accountId = req.query.accountId;
+    const domain = req.query.domain;
+    const room = req.query.room;
+    const people = req.query.people;
+    const usetime = req.query.usetime;
+    // メッセージ
+    const msg = "pay";
+    // アカウントの秘密鍵を取得する。
+    const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
+
+    // アセット送金用のコマンドを作成
+    let COMMAND = ['node ./server/call/PayAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey, msg];
+    COMMAND = COMMAND.join(' ');
+    console.log('Execute COMMAND=', COMMAND);
+
+    // ブロック高用の変数
+    let block = 0;
+    // コマンドを実行する。
+    exec( COMMAND , function(error, stdout, stderr) {
+        if (error !== null) {                
+            console.log('exec error: ' + error)
+            return
         }
-        console.log('取得結果：', docs.rows);
-        res.json({ roles: docs.rows });
+        console.log(stdout)
+        //ブロック位置を取得
+        if (stdout.match(/height: (\d+),/) !== null){
+            block = stdout.match(/height: (\d+),/)[1];
+            console.log("block:", block);
+        } else {
+            //キーファイルより公開鍵を取得
+            block = (2^64)+1
+        }
+
+        // 実行するSQL
+        const query = 'INSERT INTO shiharai_info (id,prepay,ticket,total,shisetsu,ninzu,usetime,job) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+        // パラメータ用の配列を作成する。
+        const values = [ accountId + '@' + domain, prepay, counter, total, room, people, usetime, msg ];
+        // DBの実行
+        pgHelper.execute(query, values, (err, docs) => {
+            if (err) {
+                console.log(err.toString());
+                return;
+            }
+            console.log('実行結果：', docs);
+            // res.json({ roles: docs.rows });
+        });
     });
 });
 
