@@ -32,6 +32,11 @@ function Charge(props:any):ReactElement {
     // chargeDomain用変数
     let chargeDomain:string = '';    
     const location = useLocation();
+    // 「取引履歴照会」ボタンを押した時の遷移先と渡す情報
+    const ToTxHistory = { 
+        accountId: accountId,
+        domain: domain,
+    };
 
     /**
      * 副作用フック
@@ -110,6 +115,11 @@ function Charge(props:any):ReactElement {
             </FormControl><br/><br/>
             <Button variant="contained" color="secondary" onClick={chargeAction}>
                 チャージ実行
+            </Button><br/><br/>
+            <Button variant="outlined" color="primary">
+                <Link to='/txHistory' state={ToTxHistory}>
+                    取引履歴照会
+                </Link>
             </Button><br/><br/>
             <Link to={{ pathname: '/'}}>
                 メインメニューに戻る

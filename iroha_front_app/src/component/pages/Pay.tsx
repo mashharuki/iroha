@@ -40,6 +40,11 @@ function Pay(props:any):ReactElement {
     let chargeDomain:string = '';   
     const location = useLocation();
     const classes = UseStyles();
+    // 「取引履歴照会」ボタンを押した時の遷移先と渡す情報
+    const ToTxHistory = { 
+        accountId: accountId,
+        domain: domain,
+    };
 
     /**
      * 副作用フック
@@ -178,6 +183,11 @@ function Pay(props:any):ReactElement {
             </Grid> <br/>
             <Button variant="contained" color="secondary" onClick={payAction}>
                 支払い実行
+            </Button><br/><br/>
+            <Button variant="outlined" color="primary">
+                <Link to='/txHistory' state={ToTxHistory}>
+                    取引履歴照会
+                </Link>
             </Button><br/><br/>
             <Link to={{ pathname: '/'}}>
                 メインメニューに戻る

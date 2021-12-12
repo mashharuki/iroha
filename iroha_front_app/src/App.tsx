@@ -10,6 +10,7 @@ import Input from './component/pages/Input';
 import Pay from './component/pages/Pay';
 import Charge from './component/pages/Charge';
 import NoPage from './component/pages/NoPage';
+import TxHistory from './component/pages/TxHistory';
 import UseStyles from "./component/common/UseStyles";
 import { AppBar } from '@material-ui/core';
 import { Toolbar } from '@material-ui/core';
@@ -34,6 +35,7 @@ function App():ReactElement {
           <Route path="/input" element={<Input />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/charge" element={<Charge />} />
+          <Route path="/txHistory" element={<TxHistory />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </div>

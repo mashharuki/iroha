@@ -215,6 +215,28 @@ app.get('/api/pay', (req, res) => {
     });
 });
 
+/**
+ * 取引履歴照会用API
+ */
+app.get('/api/getTxHistory', (req, res) => {
+    // パラメータから値を取得する。
+    const accountId = req.query.accountId;
+    const domain = req.query.domain;
+    // 実行するSQL
+    const query = 'select * from shiharai_info where id = $1';
+    // パラメータ用の配列を作成する。
+    const values = [ accountId + '@' + domain ];
+    // DBの実行
+    pgHelper.execute(query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('実行結果：', docs);
+        res.json({ txHistory: docs.rows });
+    });
+});
+
 // 静的ファイルを自動的に返すようルーティングする。
 app.use('/input', express.static('./build'));
 app.use('/pay', express.static('./build'));
