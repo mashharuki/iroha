@@ -11,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Grid from '@mui/material/Grid';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
+import superAgent from 'superagent';
 
 // APIサーバーのURL
 const baseUrl = "http://localhost:3001";
@@ -57,7 +58,31 @@ function Pay(props:any):ReactElement {
      * 「支払い」ボタンを押した時に処理する関数
      */
     const payAction = () => {
+        // 合計を計算する。
+        let total = counter * prepay;
+        // API用のパラメータ変数
+        const params = {
+            prepay: prepay,
+            counter: counter,
+            total: total,
+            accountId: accountId,
+            domain: domain,
+            room: room,
+            people: people,
+            useTime: useTime,
+        }
 
+        // 支払い処理用のAPIを呼び出す。
+        superAgent
+            .get(baseUrl + '/api/pay')
+            .query(params) 
+            .end((err, res) => {
+                if (err) {
+                    console.log("支払い処理用API呼び出し中に失敗", err)
+                    return err;
+                }
+                console.log("支払い処理用API呼び出し結果：", res);
+            });
     }
 
     return (
