@@ -18,14 +18,11 @@ const GetPrivKey = function(accountId, domain) {
     let privateKey = '';
 
     // ファイルから秘密鍵情報を読み取る。
-    fs.readFileSync((KEY_DIR + accountId + '@' + domain + '.priv'), function(err, data) {
-        if (err) {
-            throw err
-        }
-        console.log("data:", data);
-        // 値を詰める。
-        privateKey = data;
-    })
+    try {
+        privateKey =  fs.readFileSyncn((KEY_DIR + accountId + '@' + domain + '.priv'), "utf8");
+    } catch(e) {
+        console.log(e.message);
+    }
 
     return privateKey;
 }

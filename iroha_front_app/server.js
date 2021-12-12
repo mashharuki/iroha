@@ -177,7 +177,7 @@ app.get('/api/pay', (req, res) => {
     const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
 
     // アセット送金用のコマンドを作成
-    let COMMAND = ['node ./server/call/PayAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey, msg];
+    let COMMAND = ['node ./server/iroha/call/PayAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey, msg];
     COMMAND = COMMAND.join(' ');
     console.log('Execute COMMAND=', COMMAND);
 
