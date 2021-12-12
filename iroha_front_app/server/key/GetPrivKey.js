@@ -18,7 +18,7 @@ const GetPrivKey = function(accountId, domain) {
     let privateKey = '';
 
     // ファイルから秘密鍵情報を読み取る。
-    fs.readFile((KEY_DIR + accountId + '@' + domain + '.priv'), function(err, data) {
+    fs.readFileSync((KEY_DIR + accountId + '@' + domain + '.priv'), function(err, data) {
         if (err) {
             throw err
         }
