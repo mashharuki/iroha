@@ -36,7 +36,8 @@ setTimeout(() => {
 queries.fetchCommits({
     privateKey: adminPriv,
     creatorAccountId: adminId,
-    queryService
+    queryService,
+    timeoutLimit: 7000
 },
 (block) => {
     console.log('fetchCommits new block:', util.inspect(block,false,null))
