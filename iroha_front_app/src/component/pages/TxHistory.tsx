@@ -96,7 +96,7 @@ function TxHistory(props:any):ReactElement {
                     return err;
                 }
                 console.log("支払い処理用API呼び出し結果：", res);
-                return res.body;
+                return res.body.text;
             });
     }
 
