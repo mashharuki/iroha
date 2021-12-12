@@ -70,7 +70,7 @@ app.get('/api/input', (req, res) => {
     let publicKey = Keycreate.Keycreate(accountId, domain);
 
     // アカウント作成用のコマンドを作成
-    let COMMAND = ['node ./server/call/CreateAccountCall.js', domain, accountId, publicKey];
+    let COMMAND = ['node ./server/iroha/call/CreateAccountCall.js', domain, accountId, publicKey];
     COMMAND = COMMAND.join(' ');
     console.log('Execute COMMAND=', COMMAND);
 
@@ -120,7 +120,7 @@ app.get('/api/charge', (req, res) => {
     // アカウントの秘密鍵を取得する。
     const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
     // アカウント作成用のコマンドを作成
-    let COMMAND = ['node ./server/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey];
+    let COMMAND = ['node ./server/iroha/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey];
     COMMAND = COMMAND.join(' ');
     console.log('Execute COMMAND=', COMMAND);
 
