@@ -232,7 +232,7 @@ app.get('/api/getTxHistory', (req, res) => {
             console.log(err.toString());
             return;
         }
-        console.log('実行結果：', docs);
+        console.log('実行結果：', docs.rows);
         res.json({ txHistory: docs.rows });
     });
 });
