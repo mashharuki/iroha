@@ -95,8 +95,8 @@ function TxHistory(props:any):ReactElement {
                     console.log("支払い処理用API呼び出し中に失敗", err)
                     return err;
                 }
-                console.log("支払い処理用API呼び出し結果：", res.body);
-                return res.body;
+                console.log("支払い処理用API呼び出し結果：", res.body["txHistory"]);
+                return res.body["txHistory"];
             });
     }
 
