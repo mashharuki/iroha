@@ -138,7 +138,7 @@ function TxHistory(props:any):ReactElement {
                                 .map((row, index) => {
                                         return (
                                             <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                                                {columns.map((column, index) => {
+                                                {columns.map((column, columnIndex) => {
                                                     // セルに格納する値用の変数
                                                     let value;
                                                     // No以外は、columnの項目と紐付けを行って値をセットする。
