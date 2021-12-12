@@ -2,7 +2,7 @@
  * アカウント作成処理用コンポーネントファイル
  */
 
-import grpc2 from 'grpc';
+import grpc from 'grpc';
 import { QueryService_v1Client, CommandService_v1Client } from 'iroha-helpers/lib/proto/endpoint_grpc_pb';
 import queries from 'iroha-helpers/lib/queries/index';
 import commands from 'iroha-helpers/lib/commands/index';
@@ -19,9 +19,9 @@ const IROHA_ADDRESS = 'localhost:51051';
 const adminId = 'admin@test';
 const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70';
 // コマンドを利用するためのインスタンスを生成
-const commandService = new CommandService_v1Client(IROHA_ADDRESS, grpc2.credentials.createInsecure());
+const commandService = new CommandService_v1Client(IROHA_ADDRESS, grpc.credentials.createInsecure());
 // クエリを利用するためのインスタンスを生成
-const queryService = new QueryService_v1Client(IROHA_ADDRESS, grpc2.credentials.createInsecure());
+const queryService = new QueryService_v1Client(IROHA_ADDRESS, grpc.credentials.createInsecure());
 
 // 自動的終了するための処理
 setTimeout(() => {
