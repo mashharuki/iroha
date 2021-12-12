@@ -18,7 +18,7 @@ const pgHelper = require('./server/db/pgHelper');
 // 鍵生成用のモジュールを読み込む
 const Keycreate = require('./server/key/KeyCreate');
 // 鍵取得用のモジュールを読み込む
-const GetPrivKey = require('./server/GetPrivKey');
+const GetPrivKey = require('./server/key/GetPrivKey');
 
 // APIの定義
 
