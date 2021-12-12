@@ -22,6 +22,7 @@ const GetPrivKey = function(accountId, domain) {
         if (err) {
             throw err
         }
+        console.log("data:", data);
         // 値を詰める。
         privateKey = data;
     })
