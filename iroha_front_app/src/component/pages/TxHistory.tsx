@@ -70,7 +70,7 @@ function TxHistory(props:any):ReactElement {
         setAccoutId(payAccountId);
         setDomain(chargeDomain);
         // DBから値を取得する。
-        let data = getTxHistories(accountId, domain);
+        let data = getTxHistories(payAccountId, chargeDomain);
         setTxStories(data);
     }, []);
 
