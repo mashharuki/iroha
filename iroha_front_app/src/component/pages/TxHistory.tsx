@@ -143,7 +143,7 @@ function TxHistory(props:any):ReactElement {
                                                     // セルに格納する値用の変数
                                                     let value;
                                                     // No以外は、columnの項目と紐付けを行って値をセットする。
-                                                    if (column.id == 'No') {
+                                                    if (column.id == 'no') {
                                                         value = index;
                                                     } else {
                                                         value = row[column.id];
