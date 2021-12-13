@@ -34,12 +34,12 @@ interface Column {
 const columns: readonly Column[] = [
     { id: 'No', label: 'No', minWidth: 20, align: 'center' },
     { id: 'ID', label: 'ID', minWidth: 170, align: 'center' },
-    { id: 'prepay', label: 'prepay', minWidth: 170, align: 'center' },
-    { id: 'ticket', label: 'ticket', minWidth: 170, align: 'center' },
-    { id: 'total', label: 'total', minWidth: 170, align: 'center' },
+    { id: 'prepay', label: 'prepay', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
+    { id: 'ticket', label: 'ticket', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
+    { id: 'total', label: 'total', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
     { id: 'room', label: 'room', minWidth: 170, align: 'center' },
-    { id: 'people', label: 'people', minWidth: 70, align: 'center' },
-    { id: 'useTime', label: 'useTime', minWidth: 170, align: 'center' },
+    { id: 'people', label: 'people', minWidth: 70, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
+    { id: 'useTime', label: 'useTime', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
     { id: 'job', label: 'job', minWidth: 100, align: 'center' },
 ];
  
@@ -71,6 +71,7 @@ function TxHistory(props:any):ReactElement {
         setDomain(chargeDomain);
         // DBから値を取得する。
         let data = getTxHistories(payAccountId, chargeDomain);
+        console.log("取得データ：", data);
         setTxStories(data);
     }, []);
 
