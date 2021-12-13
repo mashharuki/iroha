@@ -101,6 +101,7 @@ function TxHistory(props:any):ReactElement {
                 console.log("支払い処理用API呼び出し結果：", res.body);
                 result = res.body;
             });
+        console.log("取得結果：", result);
         return result;
     }
 
