@@ -21,7 +21,7 @@ const baseUrl = "http://localhost:3001";
  * 表の列項目用のインターフェース
  */
 interface Column {
-    id: 'No' | 'ID' | 'prepay' | 'ticket' | 'total' | 'room' | 'people' | 'useTime' | 'job';
+    id: 'no' | 'id' | 'prepay' | 'ticket' | 'total' | 'shisetsu' | 'ninzu' | 'usetime' | 'job';
     label: string;
     minWidth?: number;
     align?: 'center';
@@ -32,14 +32,14 @@ interface Column {
  * 表の最上位ヘッダー部の配列 
  */
 const columns: readonly Column[] = [
-    { id: 'No', label: 'No', minWidth: 20, align: 'center' },
-    { id: 'ID', label: 'ID', minWidth: 170, align: 'center' },
+    { id: 'no', label: 'no', minWidth: 20, align: 'center' },
+    { id: 'id', label: 'id', minWidth: 170, align: 'center' },
     { id: 'prepay', label: 'prepay', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
     { id: 'ticket', label: 'ticket', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
     { id: 'total', label: 'total', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'room', label: 'room', minWidth: 170, align: 'center' },
-    { id: 'people', label: 'people', minWidth: 70, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'useTime', label: 'useTime', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
+    { id: 'shisetsu', label: 'shisetsu', minWidth: 170, align: 'center' },
+    { id: 'ninzu', label: 'ninzu', minWidth: 70, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
+    { id: 'usetime', label: 'usetime', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
     { id: 'job', label: 'job', minWidth: 100, align: 'center' },
 ];
  

@@ -223,7 +223,7 @@ app.get('/api/getTxHistory', (req, res) => {
     const accountId = req.query.accountId;
     const domain = req.query.domain;
     // 実行するSQL
-    const query = 'select * from shiharai_info where id = $1';
+    const query = 'select no, id, prepay, ticket, total, shisetsu, ninzu, usetime, job from shiharai_info where id = $1';
     // パラメータ用の配列を作成する。
     const values = [ accountId + '@' + domain ];
     // DBの実行
