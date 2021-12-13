@@ -233,7 +233,7 @@ app.get('/api/getTxHistory', (req, res) => {
             return;
         }
         console.log('実行結果：', docs.rows);
-        res.json({ txHistory: docs.rows });
+        res.status(200).send(docs.rows);
     });
 });
 
