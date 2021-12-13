@@ -70,9 +70,7 @@ function TxHistory(props:any):ReactElement {
         setAccoutId(payAccountId);
         setDomain(chargeDomain);
         // DBから値を取得する。
-        let data = getTxHistories(payAccountId, chargeDomain);
-        console.log("取得データ：", data);
-        setTxStories(data);
+        getTxHistories(payAccountId, chargeDomain);
     }, []);
 
     /**
@@ -81,7 +79,7 @@ function TxHistory(props:any):ReactElement {
      * @param ドメイン名
      * @returns 
      */
-    function getTxHistories(accountId:string, domain:string):any {
+    function getTxHistories(accountId:string, domain:string) {
         // API用のパラメータ変数
         const params = {
             accountId: accountId,
@@ -96,12 +94,12 @@ function TxHistory(props:any):ReactElement {
             .then(res => {
                 console.log("支払い処理用API呼び出し結果：", res.body);
                 result = res.body;
-                console.log("取得結果：", result);
-                return result;
+                setTxStories(result);
+                return;
             })
             .catch(err => {
                 console.log("支払い処理用API呼び出し中に失敗", err)
-                return err;
+                return;
             });
     }
 
