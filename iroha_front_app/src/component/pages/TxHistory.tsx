@@ -71,8 +71,8 @@ function TxHistory(props:any):ReactElement {
         setDomain(chargeDomain);
         // DBから値を取得する。
         let data = getTxHistories(payAccountId, chargeDomain);
-        console.log("取得データ：", data);
-        setTxStories(data);
+        console.log("取得データ：", data.body);
+        setTxStories(data.body);
     }, []);
 
     /**
