@@ -87,6 +87,8 @@ function TxHistory(props:any):ReactElement {
             accountId: accountId,
             domain: domain,
         } 
+        // 結果を格納する変数
+        let result;
         // データ取得用のAPIを呼び出す。
         superAgent
             .get(baseUrl + '/api/getTxHistory')
@@ -97,8 +99,9 @@ function TxHistory(props:any):ReactElement {
                     return err;
                 }
                 console.log("支払い処理用API呼び出し結果：", res.body);
-                return res.body;
+                result = res.body;
             });
+        return result;
     }
 
     /**
