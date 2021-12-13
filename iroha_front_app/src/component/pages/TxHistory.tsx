@@ -93,16 +93,16 @@ function TxHistory(props:any):ReactElement {
         superAgent
             .get(baseUrl + '/api/getTxHistory')
             .query(params) 
-            .end((err, res) => {
-                if (err) {
-                    console.log("支払い処理用API呼び出し中に失敗", err)
-                    return err;
-                }
+            .then(res => {
                 console.log("支払い処理用API呼び出し結果：", res.body);
                 result = res.body;
+                console.log("取得結果：", result);
+                return result;
+            })
+            .catch(err => {
+                console.log("支払い処理用API呼び出し中に失敗", err)
+                return err;
             });
-        console.log("取得結果：", result);
-        return result;
     }
 
     /**
