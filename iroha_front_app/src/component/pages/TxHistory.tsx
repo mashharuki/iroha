@@ -136,18 +136,12 @@ function TxHistory(props:any):ReactElement {
                         <TableBody>
                             { txHistories
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
+                                .map((row) => {
                                         return (
-                                            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                            <TableRow hover role="checkbox" tabIndex={-1}>
                                                 {columns.map((column, columnIndex) => {
                                                     // セルに格納する値用の変数
-                                                    let value;
-                                                    // No以外は、columnの項目と紐付けを行って値をセットする。
-                                                    if (column.id == 'no') {
-                                                        value = index;
-                                                    } else {
-                                                        value = row[column.id];
-                                                    } 
+                                                    let value = row[column.id];                                         
                                                     return (
                                                         <TableCell key={column.id} align={column.align}>
                                                             {column.format && typeof value === 'number' ? column.format(value) : value}
