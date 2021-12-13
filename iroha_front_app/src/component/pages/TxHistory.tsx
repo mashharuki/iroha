@@ -34,13 +34,13 @@ interface Column {
 const columns: readonly Column[] = [
     { id: 'no', label: 'no', minWidth: 20, align: 'center' },
     { id: 'id', label: 'id', minWidth: 170, align: 'center' },
-    { id: 'prepay', label: 'prepay', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'ticket', label: 'ticket', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'total', label: 'total', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'shisetsu', label: 'shisetsu', minWidth: 170, align: 'center' },
-    { id: 'ninzu', label: 'ninzu', minWidth: 70, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'usetime', label: 'usetime', minWidth: 170, align: 'center', format: (value: number) => value.toLocaleString('utf-8')},
-    { id: 'job', label: 'job', minWidth: 100, align: 'center' },
+    { id: 'prepay', label: 'prepay', minWidth: 170, align: 'center'},
+    { id: 'ticket', label: 'ticket', minWidth: 170, align: 'center'},
+    { id: 'total', label: 'total', minWidth: 170, align: 'center'},
+    { id: 'shisetsu', label: 'shisetsu', minWidth: 170, align: 'center'},
+    { id: 'ninzu', label: 'ninzu', minWidth: 70, align: 'center'},
+    { id: 'usetime', label: 'usetime', minWidth: 170, align: 'center'},
+    { id: 'job', label: 'job', minWidth: 100, align: 'center'},
 ];
  
 /**
