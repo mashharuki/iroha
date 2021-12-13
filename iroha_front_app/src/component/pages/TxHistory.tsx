@@ -95,7 +95,6 @@ function TxHistory(props:any):ReactElement {
                 console.log("支払い処理用API呼び出し結果：", res.body);
                 result = res.body;
                 setTxStories(result);
-                console.log("txHistory:", result);
                 return;
             })
             .catch(err => {
@@ -124,8 +123,11 @@ function TxHistory(props:any):ReactElement {
 
     return (
         <div className="App">
+            <h2>
+                取引履歴照会
+            </h2>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer sx={{ maxHeight: 800 }}>
+                <TableContainer sx={{ maxHeight: 600 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -166,7 +168,7 @@ function TxHistory(props:any):ReactElement {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-            </Paper>
+            </Paper><br/><br/>
             <Link to={{ pathname: '/'}}>
                 ホーム画面に戻る
             </Link>
