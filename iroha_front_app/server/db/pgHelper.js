@@ -2,13 +2,13 @@
  * DB接続用のモジュール
  */
 
-const execute = function (query, values, callback) {
+const execute = function (database, query, values, callback) {
     const { Client } = require('pg');
     // DB接続用の初期設定
     const client = new Client({
         user: 'postgres',
         host: '127.0.0.1',
-        database: 'reidai',
+        database: database,
         password: 'mysecretpassword',
         port: 15432,
     });

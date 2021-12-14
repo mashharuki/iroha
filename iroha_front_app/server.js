@@ -7,6 +7,9 @@ const express = require('express');
 const app = express();
 // ポート番号
 const portNo = 3001;
+// 接続するデータベース名
+const database1 = 'reidai';
+const database2 = 'iroha_default';
 // 起動
 app.listen(portNo, () => {
     console.log('起動しました', `http://localhost:${portNo}`)
@@ -30,7 +33,7 @@ const GetPrivKey = require('./server/key/GetPrivKey');
     const query = req.query.query;
     const values = req.query.values;
     // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
+    pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
             return;
@@ -94,7 +97,7 @@ app.get('/api/input', (req, res) => {
         // パラメータ用の配列を作成する。
         const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
         // DBの実行
-        pgHelper.execute(query, values, (err, docs) => {
+        pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
                 return;
@@ -147,7 +150,7 @@ app.get('/api/charge', (req, res) => {
         // パラメータ用の配列を作成する。
         const values = [ accountId + '@' + domain, prepay, counter, total, '-', 0, 0, msg ];
         // DBの実行
-        pgHelper.execute(query, values, (err, docs) => {
+        pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
                 return;
@@ -204,7 +207,7 @@ app.get('/api/pay', (req, res) => {
         // パラメータ用の配列を作成する。
         const values = [ accountId + '@' + domain, prepay, counter, total, room, people, usetime, msg ];
         // DBの実行
-        pgHelper.execute(query, values, (err, docs) => {
+        pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
                 return;
@@ -227,7 +230,7 @@ app.get('/api/getTxHistory', (req, res) => {
     // パラメータ用の配列を作成する。
     const values = [ accountId + '@' + domain ];
     // DBの実行
-    pgHelper.execute(query, values, (err, docs) => {
+    pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
             return;
