@@ -31,7 +31,7 @@ function Home():ReactElement {
     return (
         <div className="App">
             <h2>
-                メインメニュー
+                ホーム画面
             </h2>
             <Link to={{ pathname: '/input'}}>
                 １．新規会員登録
@@ -61,7 +61,10 @@ function Home():ReactElement {
                 <Link to='/pay' state={ToPay}>
                     ３．支払
                 </Link>
-            </Button>
+            </Button><br/><br/>
+            <Link to={{ pathname: '/login'}}>
+                ログインは、こちら
+            </Link>
         </div>
     );
 }
