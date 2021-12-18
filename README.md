@@ -195,7 +195,8 @@ Hyperledger Irohaを学習するためのリポジトリです。
       bd VARCHAR(20),  
       ed VARCHAR(20),  
       block bigint,  
-      today timestamp DEFAULT now(),  
+      today timestamp DEFAULT now(), 
+      password VARCHAR(300), 
       PRIMARY KEY (no));`  
 
    `CREATE TABLE shiharai_info (
@@ -245,7 +246,7 @@ Hyperledger Irohaを学習するためのリポジトリです。
    3. `node server.js`
 
 ### iroha_front_appについて
-    TypeScript + Reactにより構築。  
+    TypeScript + React + express により構築。  
 
 ### server.jsについて
     expressを利用して構築したWebサーバー  
@@ -257,6 +258,9 @@ Hyperledger Irohaを学習するためのリポジトリです。
     npm install @types/superagent   
     ※その他のモジュールについても必要に応じて@typesをつけてインストールする必要あり。
    
+### DBにカラムを追加する時の例
+   `ALTER TABLE kaiin_info ADD COLUMN password VARCHAR(300);`
+
 ### 参考サイト
    <a href="https://visionmedia.github.io/superagent/">superAgentの公式ページ</a>
    <a href="https://github.com/hyperledger/iroha-javascript">Hyperledger Irohaのjavascriptライブラリのリポジトリ</a>

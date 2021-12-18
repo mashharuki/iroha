@@ -3,8 +3,12 @@
  */
 
 import React, { useState, useEffect, ReactElement } from "react";
+import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from "@material-ui/core";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
@@ -17,6 +21,12 @@ function Login():ReactElement {
     const [ domain, setDomain ] = useState('nihon');
     const [ accountId, setAccoutId ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ successFlg, setSuccessFlg ] = useState(true);
+    // ログインに成功した時に遷移先に渡すデータを定義する。
+    const ToTxHistory = {
+        domain: domain,
+        accountId: accountId,
+    };
 
     // スタイルコンポーネント用の変数
     const classes = UseStyles();
@@ -24,11 +34,46 @@ function Login():ReactElement {
     const baseUrl = "http://localhost:3001";
 
     // ここにデータベースに照会する処理を追加する。
-    const loginAction = () => {};
+    const loginAction = () => {
+        // API用のパラメータ変数
+        const params = { 
+            domain: domain,
+            accountId: accountId,
+            password: password,
+        };
+
+        // 登録用のAPIを呼び出す。
+        superAgent
+            .post(baseUrl + '/api/login')
+            .query(params) 
+            .then(res => {
+                console.log("API呼び出し結果：", res.body);
+                // 取得結果を確認する。
+                if(res.body.length >= 1){
+                    // 成功した場合は、取引照会画面に遷移する。
+                    return <Navigate to="/txHistory" state={ToTxHistory} />
+                } else {
+                    setSuccessFlg(false);
+                }
+            })
+            .catch(e => {
+                console.log("API呼び出し失敗：",e.message);
+                setSuccessFlg(false);
+                return ;
+            });
+    };
 
     return (
         <div className="App">
             <h2>ログイン画面</h2><br/><br/>
+            { !successFlg ? (
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        入力内容に誤りがございます。<strong>再度、ご確認をお願いいたします。</strong>
+                    </Alert>
+                </Stack>
+            ) : <></>}
             アカウントID：
             <Input
                 id="accountId" 

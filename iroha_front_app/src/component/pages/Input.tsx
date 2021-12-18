@@ -22,6 +22,7 @@ function Input():ReactElement {
     const [ tel, setTel ] = useState('')
     const [ bd, setBd ] = useState('')
     const [ ed, setEd ] = useState('')
+    const [ password, setPassword ] = useState('')
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
@@ -49,7 +50,8 @@ function Input():ReactElement {
             adds: adds, 
             tel: tel, 
             bd: bd, 
-            ed: edate, 
+            ed: edate,
+            password: password,
         };
 
         // 登録用のAPIを呼び出す。
@@ -68,12 +70,19 @@ function Input():ReactElement {
     return (
         <div className="App">
             <h2>新規会員登録ページ</h2><br/><br/>
-            アカウント：
+            アカウントID：
             <Input2
                 id="accountId" 
                 value={accountId} 
                 className={classes.textField}
                 onChange={ (e:any) => setAccoutId(e.target.value) } 
+            /><br/>
+            パスワード：
+            <Input2
+                id="password" 
+                value={password} 
+                className={classes.textField}
+                onChange={ (e:any) => setPassword(e.target.value) } 
             /><br/>
             名前：
             <Input2

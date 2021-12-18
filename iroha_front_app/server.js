@@ -16,6 +16,8 @@ app.listen(portNo, () => {
 });
 // 外部プロセス呼び出し用に使用する。
 let exec = require('child_process').exec;
+// 暗号化用のモジュールを読み込む
+const crypto = require('crypto');
 // DB接続用のモジュールを読みこむ
 const pgHelper = require('./server/db/pgHelper');
 // 鍵生成用のモジュールを読み込む
@@ -67,6 +69,9 @@ app.get('/api/input', (req, res) => {
     let addr = req.query.adds;
     let bd = req.query.bd;
     let ed = req.query.ed;
+    let password = req.query.password;
+    // パスワードのハッシュ値を取得する。
+    let passHash = crypto.createHash('sha256').update(password).digest('hex');
     // ブロック高用の変数を用意する。
     let block = 0;
     // 公開鍵を取得する。
@@ -93,9 +98,9 @@ app.get('/api/input', (req, res) => {
             block = (2^64)+1
         }
         // 実行するSQL
-        const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+        const query = 'INSERT INTO kaiin_info (id,name,kana,addr,tel,bd,ed,block,password) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)';
         // パラメータ用の配列を作成する。
-        const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block ];
+        const values = [ accountId + '@' + domain, name, kana, addr, tel, bd, ed, block, passHash ];
         // DBの実行
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
@@ -240,8 +245,35 @@ app.get('/api/getTxHistory', (req, res) => {
     });
 });
 
+/**
+ * IDとパスワードを値を検証するAPI
+ */
+app.post('/api/login', (req, res) => {
+    // パラメータから値を取得する。
+    const accountId = req.query.accountId;
+    const domain = req.query.domain;
+    const password = req.query.password;
+    // パスワードのハッシュ値を取得する。
+    const passHash = crypto.createHash('sha256').update(password).digest('hex');
+    // 実行するSQL
+    const query = 'select * from kaiin_info where id = $1 and password = $2';
+    // パラメータ用の配列を作成する。
+    const values = [ accountId + '@' + domain, passHash ];
+    // DBの実行
+    pgHelper.execute(database1, query, values, (err, docs) => {
+        if (err) {
+            console.log(err.toString());
+            return;
+        }
+        console.log('実行結果：', docs.rows);
+        res.status(200).send(docs.rows);
+    });
+});
+
 // 静的ファイルを自動的に返すようルーティングする。
 app.use('/input', express.static('./build'));
 app.use('/pay', express.static('./build'));
 app.use('/charge', express.static('./build'));
+app.use('/login', express.static('./build'));
+app.use('/txHistory', express.static('./build'));
 app.use('/', express.static('./build'));
