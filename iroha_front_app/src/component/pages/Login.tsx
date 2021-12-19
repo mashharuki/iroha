@@ -66,7 +66,10 @@ function Login():ReactElement {
 
     return (
         <div className="App">
-            { loginCheckFlg ? ( <Navigate to="/txHistory" state={ToTxHistory} /> ) : <></> } 
+            { 
+                // ログインに成功した場合は、取引照会画面に遷移する。
+                loginCheckFlg ? ( <Navigate to="/txHistory" state={ToTxHistory} /> ) : <></> 
+            } 
             <h2>ログイン画面</h2><br/><br/>
             { !successFlg ? (
                 <Stack sx={{ width: '100%' }} spacing={2}>
