@@ -38,8 +38,8 @@ function App():ReactElement {
       </AppBar>
       <div className={classes.root}>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route path="/input" element={<Input />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/charge" element={<Charge />} />

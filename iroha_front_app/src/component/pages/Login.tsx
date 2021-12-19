@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
+import { render } from "react-dom";
  
 /**
  *  Loginコンポーネント
@@ -65,37 +66,36 @@ function Login():ReactElement {
 
     return (
         <div className="App">
-            setLoginCheckFlg ? (   
-                <h2>ログイン画面</h2><br/><br/>
-                { !successFlg ? (
-                    <Stack sx={{ width: '100%' }} spacing={2}>
-                        <Alert severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            入力内容に誤りがございます。<strong>再度、ご確認をお願いいたします。</strong>
-                        </Alert>
-                    </Stack>
-                ) : <></>}
-                アカウントID：
-                <Input
-                    id="accountId" 
-                    value={accountId} 
-                    className={classes.textField}
-                    onChange={ (e:any) => setAccoutId(e.target.value) } 
-                /><br/>
-                パスワード：
-                <Input
-                    id="password" 
-                    value={password} 
-                    className={classes.textField}
-                    onChange={ (e:any) => setPassword(e.target.value) } 
-                /><br/><br/>
-                <Button variant="contained" color="secondary" onClick={loginAction}>
-                    ログイン
-                </Button><br/><br/>
-                <Link to={{ pathname: '/'}}>
-                    ホーム画面に戻る
-                </Link>
-            ):(<Navigate to="/txHistory" state={ToTxHistory} />)
+            { loginCheckFlg ? ( <Navigate to="/txHistory" state={ToTxHistory} /> ) : <></> } 
+            <h2>ログイン画面</h2><br/><br/>
+            { !successFlg ? (
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        入力内容に誤りがございます。<strong>再度、ご確認をお願いいたします。</strong>
+                    </Alert>
+                </Stack>
+            ) : <></>}
+            アカウントID：
+            <Input
+                id="accountId" 
+                value={accountId} 
+                className={classes.textField}
+                onChange={ (e:any) => setAccoutId(e.target.value) } 
+            /><br/>
+            パスワード：
+            <Input
+                id="password" 
+                value={password} 
+                className={classes.textField}
+                onChange={ (e:any) => setPassword(e.target.value) } 
+            /><br/><br/>
+            <Button variant="contained" color="secondary" onClick={loginAction}>
+                ログイン
+            </Button><br/><br/>
+            <Link to={{ pathname: '/'}}>
+                ホーム画面に戻る
+            </Link>
         </div>
     );
 }
