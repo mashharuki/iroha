@@ -65,7 +65,7 @@ function Login():ReactElement {
 
     return (
         <div className="App">
-            !setLoginCheckFlg ? (   
+            setLoginCheckFlg ? (   
                 <h2>ログイン画面</h2><br/><br/>
                 { !successFlg ? (
                     <Stack sx={{ width: '100%' }} spacing={2}>
