@@ -107,7 +107,7 @@ app.get('/api/input', (req, res) => {
                 console.log(err.toString());
                 return;
             }
-            console.log('実行結果：', docs);
+            // console.log('実行結果：', docs);
             // res.json({ roles: docs.rows });
         });
     });
@@ -265,7 +265,7 @@ app.post('/api/login', (req, res) => {
             console.log(err.toString());
             return;
         }
-        console.log('実行結果：', docs.rows);
+        // console.log('実行結果：', docs.rows);
         res.status(200).send(docs.rows);
     });
 });

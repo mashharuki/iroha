@@ -22,6 +22,7 @@ function Login():ReactElement {
     const [ accountId, setAccoutId ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ successFlg, setSuccessFlg ] = useState(true);
+    const [ loginCheckFlg, setLoginCheckFlg ] = useState(false);
     // ログインに成功した時に遷移先に渡すデータを定義する。
     const ToTxHistory = {
         domain: domain,
@@ -50,8 +51,7 @@ function Login():ReactElement {
                 console.log("API呼び出し結果：", res.body);
                 // 取得結果を確認する。
                 if(res.body.length >= 1){
-                    // 成功した場合は、取引照会画面に遷移する。
-                    return <Navigate to="/txHistory" state={ToTxHistory} />
+                    setLoginCheckFlg(true);
                 } else {
                     setSuccessFlg(false);
                 }
@@ -65,37 +65,39 @@ function Login():ReactElement {
 
     return (
         <div className="App">
-            <h2>ログイン画面</h2><br/><br/>
-            { !successFlg ? (
-                <Stack sx={{ width: '100%' }} spacing={2}>
-                    <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        入力内容に誤りがございます。<strong>再度、ご確認をお願いいたします。</strong>
-                    </Alert>
-                </Stack>
-            ) : <></>}
-            アカウントID：
-            <Input
-                id="accountId" 
-                value={accountId} 
-                className={classes.textField}
-                onChange={ (e:any) => setAccoutId(e.target.value) } 
-            /><br/>
-            パスワード：
-            <Input
-                id="password" 
-                value={password} 
-                className={classes.textField}
-                onChange={ (e:any) => setPassword(e.target.value) } 
-            /><br/><br/>
-            <Button variant="contained" color="secondary" onClick={loginAction}>
-                ログイン
-            </Button><br/><br/>
-            <Link to={{ pathname: '/'}}>
-                ホーム画面に戻る
-            </Link>
+            !setLoginCheckFlg ? (   
+                <h2>ログイン画面</h2><br/><br/>
+                { !successFlg ? (
+                    <Stack sx={{ width: '100%' }} spacing={2}>
+                        <Alert severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            入力内容に誤りがございます。<strong>再度、ご確認をお願いいたします。</strong>
+                        </Alert>
+                    </Stack>
+                ) : <></>}
+                アカウントID：
+                <Input
+                    id="accountId" 
+                    value={accountId} 
+                    className={classes.textField}
+                    onChange={ (e:any) => setAccoutId(e.target.value) } 
+                /><br/>
+                パスワード：
+                <Input
+                    id="password" 
+                    value={password} 
+                    className={classes.textField}
+                    onChange={ (e:any) => setPassword(e.target.value) } 
+                /><br/><br/>
+                <Button variant="contained" color="secondary" onClick={loginAction}>
+                    ログイン
+                </Button><br/><br/>
+                <Link to={{ pathname: '/'}}>
+                    ホーム画面に戻る
+                </Link>
+            ):(<Navigate to="/txHistory" state={ToTxHistory} />)
         </div>
-    )
+    );
 }
 
 export default Login;
