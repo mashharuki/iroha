@@ -21,7 +21,7 @@ const CounterItems = [0, 10, 30, 50];
 /**
  * Chargeコンポーネント
  */
-function Charge(props:any):ReactElement {
+function Charge(props:any) {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('')
     const [ domain, setDomain ] = useState('')

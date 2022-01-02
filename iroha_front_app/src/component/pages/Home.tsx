@@ -11,7 +11,7 @@ import UseStyles from "../common/UseStyles";
 /**
  * Homeコンポーネント
  */
-function Home():ReactElement {
+function Home() {
     // ステート変数
     const [ chargeAccountId, setChargeAccountId ] = useState('');
     const [ payAccountId, setPayAccountId ] = useState('');

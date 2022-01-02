@@ -13,17 +13,17 @@ import NoPage from './component/pages/NoPage';
 import TxHistory from './component/pages/TxHistory';
 import UseStyles from "./component/common/UseStyles";
 import Login from './component/pages/Login';
+import UnAuthRoute from './component/pages/common/UnAuthProvider';
+import PrivateRoute from './component/pages/common/PrivateRoute';
 import { AppBar } from '@material-ui/core';
 import { Toolbar } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-
-// 認証状態を判断する変数(今は、仮)
-const isAuthenticated = true;
+import AuthUserProvider from './component/pages/common/AuthUserContext';
 
 /**
  * Appコンポーネント
  */
-function App():ReactElement {
+function App() {
   // スタイルを使用するための変数を用意する。
   const classes = UseStyles();
 
@@ -37,15 +37,9 @@ function App():ReactElement {
         </Toolbar>
       </AppBar>
       <div className={classes.root}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/input" element={<Input />} />
-          <Route path="/pay" element={<Pay />} />
-          <Route path="/charge" element={<Charge />} />
-          <Route path="/txHistory" element={<TxHistory />} />
-          <Route path="*" element={<NoPage />} />
-        </Routes>
+        <AuthUserProvider>
+          <PrivateRoute />
+        </AuthUserProvider>
       </div>
     </Router>
   );

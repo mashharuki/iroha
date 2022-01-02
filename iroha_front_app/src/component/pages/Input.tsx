@@ -12,7 +12,7 @@ import superAgent from 'superagent';
 /**
  *  Inputコンポーネント
  */
-function Input():ReactElement {
+function Input() {
     // ステート変数
     const [ domain, setDomain ] = useState('nihon')
     const [ accountId, setAccoutId ] = useState('')

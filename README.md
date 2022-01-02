@@ -264,3 +264,5 @@ Hyperledger Irohaを学習するためのリポジトリです。
 ### 参考サイト
    <a href="https://visionmedia.github.io/superagent/">superAgentの公式ページ</a>
    <a href="https://github.com/hyperledger/iroha-javascript">Hyperledger Irohaのjavascriptライブラリのリポジトリ</a>
+   <a href="https://zenn.dev/msksgm/articles/20211117-typescript-react-router-dom-layout">画面遷移実装サンプル</a>
+   <a href="https://qiita.com/seira/items/fccdf4e73c59c491558d">useContextの解説</a>

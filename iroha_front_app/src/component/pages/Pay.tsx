@@ -25,7 +25,7 @@ const TimeItems = [0.5, 1, 2, 3, 4, 5];
 /**
  * Payコンポーネント
  */
-function Pay(props:any):ReactElement {
+function Pay(props:any) {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('')
     const [ prepay, setPrepay ] = useState(0)

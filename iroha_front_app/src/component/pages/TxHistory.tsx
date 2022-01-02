@@ -46,7 +46,7 @@ const columns: readonly Column[] = [
 /**
  * TxHistoryコンポーネント
  */
-function TxHistory(props:any):ReactElement {
+function TxHistory(props:any) {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('')
     const [ domain, setDomain ] = useState('')

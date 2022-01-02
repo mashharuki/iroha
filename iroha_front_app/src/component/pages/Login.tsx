@@ -12,12 +12,11 @@ import Stack from '@mui/material/Stack';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
-import { render } from "react-dom";
  
 /**
  *  Loginコンポーネント
  */
-function Login():ReactElement {
+function Login() {
     // ステート変数
     const [ domain, setDomain ] = useState('nihon');
     const [ accountId, setAccoutId ] = useState('');
