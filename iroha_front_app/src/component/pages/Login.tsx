@@ -2,7 +2,7 @@
  * ログイン画面用のコンポーネント
  */
 
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState, useEffect, ReactElement, useContext } from "react";
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from "@material-ui/core";
@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Input from '@material-ui/core/Input';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
+import { useLogin } from "./common/AuthUserContext";
  
 /**
  *  Loginコンポーネント
@@ -23,6 +24,7 @@ function Login() {
     const [ password, setPassword ] = useState('');
     const [ successFlg, setSuccessFlg ] = useState(true);
     const [ loginCheckFlg, setLoginCheckFlg ] = useState(false);
+    const auth = useLogin();
     // ログインに成功した時に遷移先に渡すデータを定義する。
     const ToTxHistory = {
         domain: domain,
@@ -52,6 +54,8 @@ function Login() {
                 // 取得結果を確認する。
                 if(res.body.length >= 1){
                     setLoginCheckFlg(true);
+                    // authuserにログインIDをセットする。
+                    auth(accountId);
                 } else {
                     setSuccessFlg(false);
                 }

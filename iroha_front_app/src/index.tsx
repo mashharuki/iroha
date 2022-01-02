@@ -1,5 +1,5 @@
 /**
- * indexファイル
+ * デフォルトコンポーネントを定義するファイル
  */
 
 import React, { createContext } from 'react';
@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Appコンポーネントをレンダリング
 ReactDOM.render(
   <React.StrictMode>
     <App />

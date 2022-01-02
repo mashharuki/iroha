@@ -15,8 +15,8 @@ function NoPage():ReactElement {
                 <p>
                     There's nothing here!
                 </p>
-                <Link to={{ pathname: '/'}}>
-                    メインメニューに戻る
+                <Link to={{ pathname: '/login'}}>
+                    ログイン画面へ
                 </Link>
             </main>
         </div>

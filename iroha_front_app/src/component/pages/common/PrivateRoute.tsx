@@ -11,7 +11,6 @@ import Pay from './../Pay';
 import Charge from './../Charge';
 import NoPage from './../NoPage';
 import TxHistory from './../TxHistory';
-import UseStyles from "./../../common/UseStyles";
 import Login from './../Login';
 
 /**
@@ -23,25 +22,22 @@ const PrivateRoute: React.FC<RouteProps> = ({...props}) => {
   // コンテキストを作成
   const authUser = useAuthUser();
   // ログイン済み確認フラグ
-  // const isAuthenticated = authUser != null
-  const isAuthenticated = true;
+  const isAuthenticated = authUser != null
   // 遷移先を変更する。
-  if (isAuthenticated) {
-    return (
+  return (
+    <>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/input" element={<Input />} />
         <Route path="/pay" element={<Pay />} />
         <Route path="/charge" element={<Charge />} />
         <Route path="/txHistory" element={<TxHistory />} />
-        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
-    );
-  }else{
-    console.log(`ログインしていないユーザーは${props.path}へはアクセスできません`)
-    return <Navigate to="/login" />;
-  }
+      { !isAuthenticated ? (<Navigate to="/login"/>) : <></> }
+    </>
+  );
 }
 
 export default PrivateRoute;
