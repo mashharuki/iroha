@@ -38,6 +38,7 @@ const GetPrivKey = require('./server/key/GetPrivKey');
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
+            res.status(500).send("テスト用API実行失敗");
             return;
         }
         console.log('取得結果：', docs.rows);
@@ -85,7 +86,8 @@ app.get('/api/input', (req, res) => {
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error)
+            console.log('exec error: ' + error);
+            res.status(500).send("トランザクション作成中にエラーが発生しました");
             return
         }
         console.log(stdout)
@@ -105,6 +107,7 @@ app.get('/api/input', (req, res) => {
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
+                res.status(500).send("DB接続中にエラーが発生しました");
                 return;
             }
             // console.log('実行結果：', docs);
@@ -137,7 +140,8 @@ app.get('/api/charge', (req, res) => {
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error)
+            console.log('exec error: ' + error);
+            res.status(500).send("トランザクション作成中に発生しました。");
             return
         }
         console.log(stdout)
@@ -158,6 +162,7 @@ app.get('/api/charge', (req, res) => {
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
+                res.status(500).send("DB接続中にエラーが発生しました。");
                 return;
             }
             console.log('実行結果：', docs);
@@ -194,7 +199,8 @@ app.get('/api/pay', (req, res) => {
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error)
+            console.log('exec error: ' + error);
+            res.status(500).send("トランザクション作成中にエラーが発生しました");
             return
         }
         console.log(stdout)
@@ -215,6 +221,7 @@ app.get('/api/pay', (req, res) => {
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
+                res.status(500).send("DB接続中にエラーが発生しました");
                 return;
             }
             console.log('実行結果：', docs);
@@ -238,6 +245,7 @@ app.get('/api/getTxHistory', (req, res) => {
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
+            res.status(500).send("DB接続中にエラーが発生しました");
             return;
         }
         console.log('実行結果：', docs.rows);
@@ -263,7 +271,7 @@ app.post('/api/login', (req, res) => {
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
-            res.status(500).send("DB接続中にエラーが発生しました")
+            res.status(500).send("DB接続中にエラーが発生しました");
             return; 
         }
         // console.log('実行結果：', docs.rows);
