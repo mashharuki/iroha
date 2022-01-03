@@ -22,20 +22,22 @@ const execute = function (database, query, values, callback) {
     if (typeof values === "undefined") {
         client.query(query)
             .then((res) => {
-                client.end();
                 callback(null, res)
             })
             .catch((e) => {
-                return callback(e.stack, null);
+                callback(e.stack, null);
+            }).finally( () => {
+                client.end();
             });
     } else {
         client.query(query, values)
             .then((res) => {
-                client.end();
                 callback(null, res)
             })
-            .catch((e) => {
-                return callback(e.stack, null);
+            .catch((e) => {          
+                callback(e.stack, null);
+            }).finally( () => {
+                client.end();
             });
     }
 }

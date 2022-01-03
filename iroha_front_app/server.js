@@ -263,7 +263,8 @@ app.post('/api/login', (req, res) => {
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
-            return;
+            res.status(500).send("DB接続中にエラーが発生しました")
+            return; 
         }
         // console.log('実行結果：', docs.rows);
         res.status(200).send(docs.rows);
