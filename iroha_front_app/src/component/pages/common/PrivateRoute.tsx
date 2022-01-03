@@ -26,18 +26,14 @@ const PrivateRoute: React.FC<RouteProps> = ({...props}) => {
 
   // 遷移先を変更する。
   return (
-    <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/input" element={<Input />} />
-        <Route path="/pay" element={<Pay />} />
-        <Route path="/charge" element={<Charge />} />
-        <Route path="/txHistory" element={<TxHistory />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-      { !isAuthenticated ? (<Navigate to="/login"/>) : <></> }
-    </>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/pay" element={<Pay />} />
+      <Route path="/charge" element={<Charge />} />
+      <Route path="/txHistory" element={<TxHistory />} />
+      <Route path="*" element={<NoPage />} />
+    </Routes>
   );
 }
 

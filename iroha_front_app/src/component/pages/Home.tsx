@@ -2,7 +2,7 @@
  * トップページ用のコンポーネントファイル
  */
 
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState } from "react";
 import Button from '@material-ui/core/Button';
 import { Link  } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
@@ -33,9 +33,6 @@ function Home() {
             <h2>
                 ホーム画面
             </h2>
-            <Link to={{ pathname: '/input'}}>
-                １．新規会員登録
-            </Link><br/><br/>
             チャージアカウント：　
             <Input 
                 id="chargeAccountId" 
@@ -46,7 +43,7 @@ function Home() {
             />
             <Button variant="contained" color="secondary">
                 <Link to='/charge' state={ToCharge}>
-                    ２．チャージ
+                    1．チャージ
                 </Link>
             </Button><br/><br/>
             支払いアカウント：　
@@ -59,7 +56,7 @@ function Home() {
             />
             <Button variant="contained" color="secondary" >
                 <Link to='/pay' state={ToPay}>
-                    ３．支払
+                    2．支払
                 </Link>
             </Button><br/><br/>
             <Link to={{ pathname: '/login'}}>

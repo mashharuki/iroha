@@ -99,8 +99,8 @@ function Login() {
             <Button variant="contained" color="secondary" onClick={loginAction}>
                 ログイン
             </Button><br/><br/>
-            <Link to={{ pathname: '/'}}>
-                ホーム画面に戻る
+            <Link to={{ pathname: '/input'}}>
+                新規会員登録は、こちらから
             </Link>
         </div>
     );
