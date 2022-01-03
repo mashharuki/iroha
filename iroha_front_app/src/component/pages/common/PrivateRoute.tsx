@@ -3,7 +3,7 @@
  */
 
 import { Route, Navigate, RouteProps, Routes } from "react-router-dom";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthUser } from "./AuthUserContext";
 import Home from "./../Home";
 import Input from './../Input';
@@ -20,9 +20,10 @@ import Login from './../Login';
  */
 const PrivateRoute: React.FC<RouteProps> = ({...props}) => {
   // コンテキストを作成
-  const authUser = useAuthUser();
+  let authUser = useAuthUser();
   // ログイン済み確認フラグ
-  const isAuthenticated = authUser != null
+  let isAuthenticated = authUser != null;
+
   // 遷移先を変更する。
   return (
     <>
