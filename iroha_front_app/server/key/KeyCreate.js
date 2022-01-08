@@ -11,9 +11,11 @@ const Keycreate = function (account, domain) {
     // 公開鍵を格納(初期化)
     let public_key = ''            
     // 秘密鍵を格納(初期化)
-    let private_key = ''                   
+    let private_key = '' 
+    // 設定ファイルの読み込み
+    const ConfigFile = require('config');                  
     // キーペアのディレクトリ
-    const KEY_DIR = '/home/haruki/git/iroha/example/' 
+    const KEY_DIR = ConfigFile.config.dev_key_dir;
 
     // ed25519オブジェクト作成
     let ed25519 = require('ed25519.js')      

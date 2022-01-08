@@ -12,8 +12,10 @@ const GetPrivKey = function(accountId, domain) {
     
     // fsモジュールをインスタンス化
     const fs = require('fs');
-    // キーペア格納ディレクトリ
-    const KEY_DIR = '/home/haruki/git/iroha/example/' ;
+    // 設定ファイルの読み込み
+    const ConfigFile = require('config');                  
+    // キーペアのディレクトリ
+    const KEY_DIR = ConfigFile.config.dev_key_dir;
     // 秘密鍵用の変数
     let privateKey = '';
 

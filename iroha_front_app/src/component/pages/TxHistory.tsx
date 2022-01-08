@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import superAgent from 'superagent';
 
 // APIサーバーのURL
-const baseUrl = process.env.API_SERVER_URL;
+const baseUrl = process.env.REACT_APP_API_SERVER_URL;
 
 /**
  * 表の列項目用のインターフェース

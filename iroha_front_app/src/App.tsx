@@ -39,7 +39,7 @@ function App() {
       </AppBar>
       <div className={classes.root}>
         <AuthUserProvider>
-          { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }
+          <PrivateRoute />
         </AuthUserProvider>
       </div>
     </Router>
@@ -47,3 +47,5 @@ function App() {
 }
 
 export default App;
+
+// { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }

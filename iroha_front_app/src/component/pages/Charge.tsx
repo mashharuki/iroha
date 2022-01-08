@@ -12,7 +12,7 @@ import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
 
 // APIサーバーのURL
-const baseUrl = process.env.API_SERVER_URL;
+const baseUrl = process.env.REACT_APP_API_SERVER_URL;
 // PrePay選択肢用の配列 
 const PrePayItems = [0, 3500, 5000, 14000];
 // Counter選択肢用の配列 

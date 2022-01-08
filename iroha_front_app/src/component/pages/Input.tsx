@@ -26,7 +26,7 @@ function Input() {
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
-    const baseUrl = process.env.API_SERVER_URL;
+    const baseUrl = process.env.REACT_APP_API_SERVER_URL;
     
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
