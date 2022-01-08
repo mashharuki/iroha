@@ -2,9 +2,8 @@
  * 未ログイン状態を管理するコンポーネントをまとめるファイル
  */
 
-import { Route, Routes, RouteProps, } from "react-router-dom";
+import { Route, Routes, RouteProps } from "react-router-dom";
 import React from 'react';
-import { useAuthUser } from "./AuthUserContext";
 import Input from './../Input';
 import NoPage from './../NoPage';
 import Login from './../Login';

@@ -2,12 +2,23 @@
  * DB接続用のモジュール
  */
 
+/**
+ * DB接続＆SQL実行関数
+ * @param {*} database 接続先DB
+ * @param {*} query SQL文
+ * @param {*} values パラメータ
+ * @param {*} callback コールバック関数
+ */
 const execute = function (database, query, values, callback) {
+
     const { Client } = require('pg');
+    // 設定ファイルの読み込み
+    const ConfigFile = require('config');
+    console.log("接続先DBのIPアドレス：", ConfigFile.config.db);
     // DB接続用の初期設定
     const client = new Client({
         user: 'postgres',
-        host: '127.0.0.1',
+        host: ConfigFile.config.db,
         database: database,
         password: 'mysecretpassword',
         port: 15432,
