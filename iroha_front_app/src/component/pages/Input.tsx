@@ -26,7 +26,7 @@ function Input() {
     // スタイルコンポーネント用の変数
     const classes = UseStyles()
     // APIサーバーのURL
-    const baseUrl = "http://localhost:3001"
+    const baseUrl = process.env.API_SERVER_URL;
     
     /**
      * 登録用のAPIを呼び出してアカウント情報を登録する。
@@ -122,8 +122,8 @@ function Input() {
             <Button variant="contained" color="secondary" onClick={inputAction}>
                 登録
             </Button><br/><br/>
-            <Link to={{ pathname: '/'}}>
-                ホーム画面に戻る
+            <Link to={{ pathname: '/login'}}>
+                ログイン画面に戻る
             </Link>
         </div>
     );

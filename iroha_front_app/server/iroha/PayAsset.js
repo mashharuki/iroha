@@ -19,8 +19,10 @@ let msg = process.argv[8];
 // アセット転送先アカウント
 const tAccountId = "user@nihon";
 
+// 設定ファイルの読み込み
+const ConfigFile = require('config');
 // Hyperleder Iroha用のアドレス情報
-const IROHA_ADDRESS = 'localhost:51051';
+const IROHA_ADDRESS = ConfigFile.config.iroha_node + ':51051';
 // adminのアカウントと秘密鍵情報(開発用)
 const adminId = 'admin@test';
 const adminPriv = 'f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70';

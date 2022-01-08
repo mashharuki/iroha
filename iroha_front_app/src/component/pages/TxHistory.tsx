@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import superAgent from 'superagent';
 
 // APIサーバーのURL
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.API_SERVER_URL;
 
 /**
  * 表の列項目用のインターフェース

@@ -23,6 +23,7 @@
     "child_process": "^1.0.2",
     "config": "^3.3.6",
     "crypto": "^1.0.1",
+    "dotenv-cli": "^4.1.1",
     "express": "^4.17.1",
     "grpc": "^1.24.11",
     "iroha-helpers": "^0.6.21",

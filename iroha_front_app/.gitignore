@@ -24,3 +24,4 @@ yarn-error.log*
 
 # 設定ファイル
 /config
+/src/config/.env

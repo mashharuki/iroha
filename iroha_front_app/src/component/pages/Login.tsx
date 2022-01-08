@@ -34,7 +34,7 @@ function Login() {
     // スタイルコンポーネント用の変数
     const classes = UseStyles();
     // APIサーバーのURL
-    const baseUrl = "http://localhost:3001";
+    const baseUrl = process.env.API_SERVER_URL;
 
     // ここにデータベースに照会する処理を追加する。
     const loginAction = () => {

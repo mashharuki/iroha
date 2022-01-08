@@ -14,7 +14,7 @@ import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
 
 // APIサーバーのURL
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.API_SERVER_URL;
 // Room選択肢用の配列
 const RoomItems = ["フリースペース", "A会議室", "B会議室", "シアター"];
 // 人数選択肢用の配列
