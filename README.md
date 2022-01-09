@@ -1,10 +1,25 @@
 # iroha
 Hyperledger Irohaを学習するためのリポジトリです。  
 
-## 注意事項
+## 注意事項1
    この中で利用している公開鍵及び秘密鍵の情報は全て開発用として生成しています。  
    絶対に本番環境では利用しないようにしてください。
 
+## 注意事項2
+   iroha_front_appでは、Reactとサーバー用に設定ファイルを必要とします。
+   iroha_front_appのフォルダ直下に「.env」ファイルを  
+   iroha_front_app/configフォルダに「local.yaml」ファイルを作成してください。
+
+### .envの設定例 
+    REACT_APP_API_SERVER_URL=http://localhost:3001
+
+### local.yamlの設定例
+      config:  
+      db: 'localhost'  
+      iroha_node: 'localhost'  
+      local_key_dir: '/{gitフォルダまでのパス}/git/iroha/example/'  
+      dev_key_dir: '/{gitフォルダまでのパス}/git/iroha/example/'  
+   
 ## Hyperledger Iroha
    hyperledgerプロジェクトで4番目に採択されたブロックチェーン  
    オリジナルコードについては、ソラミツ株式会社が開発した。  

@@ -6,13 +6,11 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import UseStyles from "./component/common/UseStyles";
-import PrivateRoute from './component/pages/common/PrivateRoute';
 import { AppBar } from '@material-ui/core';
 import { Toolbar } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import AuthUserProvider, { useAuthUser } from './component/pages/common/AuthUserContext';
-import UnAuthRoute from './component/pages/common/UnAuthProvider';
 
 /**
  * Appコンポーネント
@@ -38,14 +36,10 @@ function App() {
         </Toolbar>
       </AppBar>
       <div className={classes.root}>
-        <AuthUserProvider>
-          <PrivateRoute />
-        </AuthUserProvider>
+        <AuthUserProvider />
       </div>
     </Router>
   );
 }
 
 export default App;
-
-// { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }

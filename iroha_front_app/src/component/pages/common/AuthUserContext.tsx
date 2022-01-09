@@ -4,6 +4,8 @@
 
 import React, { createContext, useContext, useState } from "react";
 import AuthUser from "./models/auth";
+import PrivateRoute from './PrivateRoute';
+import UnAuthRoute from './UnAuthProvider';
 
 // 関数のタイプを宣言する。
 type OperationType = {
@@ -26,6 +28,8 @@ const AuthOperationContext = createContext<OperationType>({
 const AuthUserProvider: React.FC = ({ children }) => {
     // ステート変数
     const [authUser, setAuthUser] = useState<AuthUser | null>(null)
+    // ログイン済み確認フラグ
+    let isAuthenticated = authUser != null;
 
     // ログイン関数
     const login = async (userId: string) => {
@@ -42,7 +46,7 @@ const AuthUserProvider: React.FC = ({ children }) => {
     return (
         <AuthOperationContext.Provider value={{login, logout}}>
             <AuthUserContext.Provider value={authUser}>
-                { children }
+                { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }
             </AuthUserContext.Provider>
         </AuthOperationContext.Provider>
     )
