@@ -58,6 +58,11 @@ function TxHistory(props:any) {
     // chargeDomain用変数
     let chargeDomain:string = '';   
     const location = useLocation();
+    // 「取引履歴照会」ボタンを押した時の遷移先と渡す情報
+    const ToHome = { 
+        accountId: accountId,
+        domain: domain,
+    };
 
     /**
      * 副作用フック
@@ -169,7 +174,7 @@ function TxHistory(props:any) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper><br/><br/>
-            <Link to={{ pathname: '/'}}>
+            <Link to={{ pathname: '/'}} state={ToHome}>
                 ホーム画面に戻る
             </Link>
         </div>

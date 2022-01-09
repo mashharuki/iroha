@@ -18,6 +18,7 @@ const UnAuthRoute: React.FC<RouteProps> = ({ ...props }) => {
     // 遷移先を制御する。
     return (
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/input" element={<Input />} />
         <Route path="*" element={<NoPage />} />

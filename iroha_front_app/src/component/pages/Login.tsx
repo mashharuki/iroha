@@ -26,7 +26,7 @@ function Login() {
     const [ loginCheckFlg, setLoginCheckFlg ] = useState(false);
     const auth = useLogin();
     // ログインに成功した時に遷移先に渡すデータを定義する。
-    const ToTxHistory = {
+    const ToHome = {
         domain: domain,
         accountId: accountId,
     };
@@ -70,8 +70,8 @@ function Login() {
     return (
         <div className="App">
             { 
-                // ログインに成功した場合は、取引照会画面に遷移する。
-                loginCheckFlg ? ( <Navigate to="/txHistory" state={ToTxHistory} /> ) : <></> 
+                // ログインに成功した場合は、ホーム画面に遷移する。
+                loginCheckFlg ? ( <Navigate to="/" state={ToHome} /> ) : <></> 
             } 
             <h2>ログイン画面</h2><br/><br/>
             { !successFlg ? (

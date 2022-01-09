@@ -2,10 +2,9 @@
  * トップページ用のコンポーネントファイル
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@material-ui/core/Button';
-import { Link  } from 'react-router-dom';
-import Input from '@material-ui/core/Input';
+import { Link, useLocation } from 'react-router-dom';
 import UseStyles from "../common/UseStyles";
 
 /**
@@ -13,55 +12,58 @@ import UseStyles from "../common/UseStyles";
  */
 function Home() {
     // ステート変数
-    const [ chargeAccountId, setChargeAccountId ] = useState('');
-    const [ payAccountId, setPayAccountId ] = useState('');
+    const [ accountId, setAccountId ] = useState('');
     const [ domain, setDomain ] = useState('nihon');
     const classes = UseStyles();
+    const location = useLocation();
+    // loginAccoutId用変数
+    let loginAccountId:string = '';
     // 「チャージアカウント」ボタンを押した時の遷移先と渡す情報
     const ToCharge = { 
-        accountId: chargeAccountId,
+        accountId: accountId,
         domain: domain,
     };
     // 「支払いアカウント」ボタンを押した時の遷移先と渡す情報
     const ToPay = { 
-        accountId: payAccountId,
+        accountId: accountId,
         domain: domain,
     };
+    // 「取引履歴照会」ボタンを押した時の遷移先と渡す情報
+    const ToTxHistory = { 
+        accountId: accountId,
+        domain: domain,
+    };
+
+    /**
+     * 副作用フック
+     */
+     useEffect(() => {
+        // 遷移元で入力したアカウントIDとドメインの情報を取得する。
+        loginAccountId = location.state.accountId;
+        // ステート変数をセットする。
+        setAccountId(loginAccountId);
+    }, []);
 
     return (
         <div className="App">
             <h2>
                 ホーム画面
             </h2>
-            チャージアカウント：　
-            <Input 
-                id="chargeAccountId" 
-                value={chargeAccountId} 
-                className={classes.textField}
-                onChange={ (e) => setChargeAccountId(e.target.value) } 
-                placeholder="Set account ID" 
-            />
             <Button variant="contained" color="secondary">
                 <Link to='/charge' state={ToCharge}>
                     1．チャージ
                 </Link>
             </Button><br/><br/>
-            支払いアカウント：　
-            <Input 
-                id="payAccountId" 
-                value={payAccountId} 
-                className={classes.textField}
-                onChange={ (e) => setPayAccountId(e.target.value) } 
-                placeholder="Set account ID" 
-            />
             <Button variant="contained" color="secondary" >
                 <Link to='/pay' state={ToPay}>
                     2．支払
                 </Link>
             </Button><br/><br/>
-            <Link to={{ pathname: '/login'}}>
-                ログインは、こちら
-            </Link>
+            <Button variant="outlined" color="primary">
+                <Link to='/txHistory' state={ToTxHistory}>
+                    取引履歴照会
+                </Link>
+            </Button>
         </div>
     );
 }
