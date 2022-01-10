@@ -49,12 +49,12 @@ function Home() {
             <h2>
                 ホーム画面
             </h2>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" className={classes.button}>
                 <Link to='/charge' state={ToCharge}>
                     1．チャージ
                 </Link>
-            </Button><br/><br/>
-            <Button variant="contained" color="secondary" >
+            </Button>
+            <Button variant="contained" color="secondary" className={classes.button}>
                 <Link to='/pay' state={ToPay}>
                     2．支払
                 </Link>

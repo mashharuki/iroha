@@ -2,7 +2,6 @@
  * メインコンポーネントファイル
  */
 
-import './App.css';
 import AuthUserProvider from './component/pages/common/AuthUserContext';
 
 /**

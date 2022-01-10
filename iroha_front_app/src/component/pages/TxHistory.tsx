@@ -45,6 +45,7 @@ const columns: readonly Column[] = [
  
 /**
  * TxHistoryコンポーネント
+ * @param props(accountIdとdomain)
  */
 function TxHistory(props:any) {
     // ステート変数
