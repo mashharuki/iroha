@@ -1,6 +1,14 @@
 # iroha
 Hyperledger Irohaを学習するためのリポジトリです。  
 
+## iroha_front_appの簡易システム構成図
+   Hyperledger Irohaを利用して構築したサンプルアプリケーションの概要図は下記の通り。  
+   クライアントアプリは、TypeScript+React.js  
+   APIサーバーは、Express  
+   DBコンテナは、Postgresqlのイメージファイル  
+   Irohaノードコンテナは、Hyperledger Irohaのイメージファイルを利用しています。
+   <img src="./docs/image_assets/iroha_front_app.png"><br><br>
+
 ## 注意事項1
    この中で利用している公開鍵及び秘密鍵の情報は全て開発用として生成しています。  
    絶対に本番環境では利用しないようにしてください。
