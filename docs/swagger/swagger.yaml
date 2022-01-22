@@ -3,7 +3,7 @@ info:
   description: "これは、iroha_front_appで利用するAPI用のswaggerUIになります。"
   version: "1.0.0"
   title: "Swagger Iroha_front_app"
-host: "localhost:3000"
+host: "localhost:3001"
 basePath: "/api"
 tags:
 - name: "Iroha_front_app API"
