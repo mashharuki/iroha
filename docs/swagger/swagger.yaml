@@ -1,0 +1,248 @@
+swagger: "2.0"
+info:
+  description: "これは、iroha_front_appで利用するAPI用のswaggerUIになります。"
+  version: "1.0.0"
+  title: "Swagger Iroha_front_app"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+- name: "Iroha_front_app API"
+  description: "APIの詳細を記載"
+  externalDocs:
+    description: "Find out more"
+    url: "localhost:3000"
+schemes:
+- "http"
+paths:
+  /publickey:
+    get:
+      tags:
+      - "Iroha_front_app"
+      summary: "公開鍵を取得する"
+      description: "鍵ペアを生成し、公開鍵の値を取得するAPIです。"
+      operationId: "publickey"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "公開鍵をjson形式で返却します。"
+        "500":
+          description: "公開鍵取得中にエラーが発生しました。"
+  /input:
+    put:
+      tags:
+      - "Iroha_front_app"
+      summary: "新規会員情報登録"
+      description: "新規会員情報を追加するためのAPIです。"
+      operationId: "input"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "新規に登録する会員の情報になります。"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "正常に登録処理が完了しました。"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
+  /charge:
+    post:
+      tags:
+      - "Iroha_front_app"
+      summary: "チャージ"
+      description: "アプリ内で使用するデジタル通貨をチャージするためのAPIです。"
+      operationId: "charge"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "チャージするデジタル通貨の情報です。"
+        required: true
+        schema:
+          $ref: "#/definitions/Charge"
+      responses:
+        "200":
+          description: "正常にチャージ処理が完了しました。"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
+  /pay:
+    post:
+      tags:
+      - "Iroha_front_app"
+      summary: "支払い"
+      description: "アプリ内で使用するデジタル通貨を支払いするためのAPIです。"
+      operationId: "pay"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "支払いするデジタル通貨の情報です。"
+        required: true
+        schema:
+          $ref: "#/definitions/Pay"
+      responses:
+        "200":
+          description: "正常に支払い処理が完了しました。"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
+  /getTxHistory:
+    get:
+      tags:
+      - "Iroha_front_app"
+      summary: "取引履歴紹介"
+      description: "アプリ内で使用したデジタル通貨の取引履歴情報を取得するAPI。"
+      operationId: "getTxHistory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "取引履歴を紹介するアカウントとデジタル通貨の情報です。"
+        required: true
+        schema:
+          $ref: "#/definitions/GetTx"
+      responses:
+        "200":
+          description: "アカウントIDとデジタル通貨に紐づく取引履歴情報(json形式)"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
+  /login:
+    post:
+      tags:
+      - "Iroha_front_app"
+      summary: "認証処理"
+      description: "IDとパスワードによる認証処理を実行するAPI。"
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "IDとパスワードです。"
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+      responses:
+        "200":
+          description: "該当するレコード数"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
+  
+definitions:
+  Charge:
+    type: "object"
+    properties:
+      prepay:
+        type: "integer"
+        description: "プリペイ"
+      counter:
+        type: "integer"
+        description: "回数券"
+      total:
+        type: "integer"
+        description: "合計額"
+      domain:
+        type: "string"
+        description: "ドメイン"
+      accountId:
+        type: "string"
+    xml:
+      name: "Charge"
+  Pay:
+    type: "object"
+    properties:
+      prepay:
+        type: "integer"
+        description: "プリペイ"
+      counter:
+        type: "integer"
+        description: "回数券"
+      total:
+        type: "integer"
+        description: "合計額"
+      accountId:
+        type: "string"
+      domain:
+        type: "string"
+        description: "ドメイン"
+      room:
+        type: "string"
+      people:
+        type: "integer"
+      usetime:
+        type: "string"
+    xml:
+      name: "Pay"
+  User:
+    type: "object"
+    properties:
+      domain:
+        type: "string"
+        description: "ドメイン"
+      accountId:
+        type: "string"
+      name:
+        type: "string"
+      kana:
+        type: "string"
+      tel:
+        type: "string"
+      addr:
+        type: "string"
+      bd:
+        type: "string"
+      ed:
+        type: "string"
+        description: "期限"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+  GetTx:
+    type: "object"
+    properties:
+      accountId:
+        type: "string"
+      domain:
+        type: "string"
+    xml:
+      name: "GetTx"
+  Login:
+    type: "object"
+    properties:
+      accountId:
+        type: "string"
+      domain:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "Login"

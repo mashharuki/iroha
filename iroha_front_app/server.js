@@ -52,9 +52,15 @@ const GetPrivKey = require('./server/key/GetPrivKey');
  app.get('/api/publickey', (req, res) => {
     // 公開鍵用の変数
     let publicKey ='';
-    // 公開鍵を取得する。
-    publicKey = Keycreate.Keycreate();
-    res.json({ publicKey: publicKey });
+
+    try {
+        // 公開鍵を取得する。
+        publicKey = Keycreate.Keycreate();
+        res.json({ publicKey: publicKey });
+    } catch(err) {
+        console.log('exec error: ' + err);
+        res.status(500).send("公開鍵取得中にエラーが発生しました。");
+    }
  });
 
 /**
@@ -107,10 +113,9 @@ app.get('/api/input', (req, res) => {
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
-                res.status(500).send("DB接続中にエラーが発生しました");
+                res.status(501).send("DB接続中にエラーが発生しました");
                 return;
             }
-            // console.log('実行結果：', docs);
             // res.json({ roles: docs.rows });
         });
     });
@@ -162,10 +167,9 @@ app.get('/api/charge', (req, res) => {
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
                 console.log(err.toString());
-                res.status(500).send("DB接続中にエラーが発生しました。");
+                res.status(501).send("DB接続中にエラーが発生しました。");
                 return;
             }
-            console.log('実行結果：', docs);
             // res.json({ roles: docs.rows });
         });
     });
@@ -245,7 +249,7 @@ app.get('/api/getTxHistory', (req, res) => {
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
             console.log(err.toString());
-            res.status(500).send("DB接続中にエラーが発生しました");
+            res.status(501).send("DB接続中にエラーが発生しました");
             return;
         }
         console.log('実行結果：', docs.rows);
