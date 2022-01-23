@@ -194,6 +194,147 @@ Hyperledger Irohaを学習するためのリポジトリです。
 }
 
 ~~~
+
+## 生成されるブロックの例
+
+~~~
+
+blockV1: {
+    payload: {
+      transactionsList: [
+        {
+          payload: {
+            reducedPayload: {
+              commandsList: [
+                {
+                  addAssetQuantity: { assetId: 'ticket#nihon', amount: '30' },
+                  addPeer: undefined,
+                  addSignatory: undefined,
+                  appendRole: undefined,
+                  createAccount: undefined,
+                  createAsset: undefined,
+                  createDomain: undefined,
+                  createRole: undefined,
+                  detachRole: undefined,
+                  grantPermission: undefined,
+                  removeSignatory: undefined,
+                  revokePermission: undefined,
+                  setAccountDetail: undefined,
+                  setAccountQuorum: undefined,
+                  subtractAssetQuantity: undefined,
+                  transferAsset: undefined
+                }
+              ],
+              creatorAccountId: 'test110@nihon',
+              createdTime: 1642920874175,
+              quorum: 1
+            },
+            batch: undefined
+          },
+          signaturesList: [
+            {
+              publicKey: 'c1a60da19955d66b6c183fb601f3a702c746234ac44818ac9b89d5029a0b73be',
+              signature: 'fc45206695431b7d6dfe6a84dfc8808a8f1fde8e6b7e6fc79b11e10286b93858622eb837aa8d0d4142899c3210af5e8e4f24abee518c38e4340a23af7ae51603'
+            }
+          ]
+        },
+        {
+          payload: {
+            reducedPayload: {
+              commandsList: [
+                {
+                  addAssetQuantity: { assetId: 'total#nihon', amount: '150000' },
+                  addPeer: undefined,
+                  addSignatory: undefined,
+                  appendRole: undefined,
+                  createAccount: undefined,
+                  createAsset: undefined,
+                  createDomain: undefined,
+                  createRole: undefined,
+                  detachRole: undefined,
+                  grantPermission: undefined,
+                  removeSignatory: undefined,
+                  revokePermission: undefined,
+                  setAccountDetail: undefined,
+                  setAccountQuorum: undefined,
+                  subtractAssetQuantity: undefined,
+                  transferAsset: undefined
+                }
+              ],
+              creatorAccountId: 'test110@nihon',
+              createdTime: 1642920874178,
+              quorum: 1
+            },
+            batch: undefined
+          },
+          signaturesList: [
+            {
+              publicKey: 'c1a60da19955d66b6c183fb601f3a702c746234ac44818ac9b89d5029a0b73be',
+              signature: 'da325146363da11d8bd8fe268f1d4f29834a7797e00a213c799e7fcda0b7e942fa6048c91357fb7c66380a41b0c30d4e737bc7173a91c39243f409965163b301'
+            }
+          ]
+        },
+        {
+          payload: {
+            reducedPayload: {
+              commandsList: [
+                {
+                  addAssetQuantity: { assetId: 'prepay#nihon', amount: '5000' },
+                  addPeer: undefined,
+                  addSignatory: undefined,
+                  appendRole: undefined,
+                  createAccount: undefined,
+                  createAsset: undefined,
+                  createDomain: undefined,
+                  createRole: undefined,
+                  detachRole: undefined,
+                  grantPermission: undefined,
+                  removeSignatory: undefined,
+                  revokePermission: undefined,
+                  setAccountDetail: undefined,
+                  setAccountQuorum: undefined,
+                  subtractAssetQuantity: undefined,
+                  transferAsset: undefined
+                }
+              ],
+              creatorAccountId: 'test110@nihon',
+              createdTime: 1642920874142,
+              quorum: 1
+            },
+            batch: undefined
+          },
+          signaturesList: [
+            {
+              publicKey: 'c1a60da19955d66b6c183fb601f3a702c746234ac44818ac9b89d5029a0b73be',
+              signature: '21c2712e3c7670e8e65016130044d8da99e042574beacc8581cb93776168dd1b9a3e0357e427370e4471a393860b75926f41bd0ff416de22c7d0c0bcf7d1bb06'
+            }
+          ]
+        }
+      ],
+      txNumber: 0,
+      height: 19,
+      prevBlockHash: '01ca4a8d5c4b52b39831a01a4a96049991de4bb4231922ec0dcce5ca196dce9b',
+      createdTime: 1642920874462,
+      rejectedTransactionsHashesList: []
+    },
+    signaturesList: [
+      {
+        publicKey: 'bddd58404d1315e0eb27902c5d7c8eb0602c16238f005773df406bc191308929',
+        signature: '2c0d74d47a4fc3d41954005e30074286d7516cfcb72290ca4bc53267c1a8e160b0747f88c6dd98f5032dafebb3d79fb13c29d3b17c741ff2c96217b457548b06'
+      },
+      {
+        publicKey: '94cc41678114bfb18c8c3e59c223e303410856bda6e34833bb4e14b2daa803dd',
+        signature: 'cfb6a2c2ccb61ab669728b99f1d4c9b50d89f1326e50866f99e37f8b0d826b1e42321fdea5e7e8cde3375da93da341e56ae10cf993e428a1cc7c7419c55b1801'
+      },
+      {
+        publicKey: '4c5a1ff9494101034a37760eaf53bef3828acfda4f61d7e8f6d3f8fb599e03bb',
+        signature: '1def05ad11cab2eebe8cc7f828b362096394e731211e327663be1c17523c4279ae300c3cba9f4500badb5c61ccd6bacdc079ca986882f2afba3a8cc2811fb905'
+      }
+    ]
+  }
+}
+
+~~~
     
 ### コンテナへのアクセスコマンド
     docker exec -it iroha /bin/bash

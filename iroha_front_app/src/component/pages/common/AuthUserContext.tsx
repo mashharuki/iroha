@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import AuthUser from "./models/auth";
 import PrivateRoute from './PrivateRoute';
 import UnAuthRoute from './UnAuthProvider';
+import '../../../App.css';
 
 // 関数のタイプを宣言する。
 type OperationType = {
@@ -68,8 +69,10 @@ const AuthUserProvider: React.FC = ({ children }) => {
                             </Toolbar>
                         </AppBar>
                     </Box>
-                    <div className={classes.root}>
-                        { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }
+                    <div className="App">
+                        <div className={classes.root}>
+                            { !isAuthenticated ? <UnAuthRoute /> : <PrivateRoute /> }
+                        </div>
                     </div>
                 </Router>   
             </AuthUserContext.Provider>
