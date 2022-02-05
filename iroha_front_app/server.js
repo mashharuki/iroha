@@ -4,16 +4,24 @@
 
 // Webサーバーの起動
 const express = require('express');
+const fs = require('fs');
 const app = express();
 // ポート番号
 const portNo = 3001;
 // 接続するデータベース名
 const database1 = 'reidai';
 const database2 = 'iroha_default';
+// HTTPS通信に対応するための設定
+const server = require('https').createServer({
+    key: fs.readFileSync('./server/tls/privatekey.pem'),
+    cert: fs.readFileSync('./server/tls/cert.pem'),
+}, app);
+
 // 起動
-app.listen(portNo, () => {
+server.listen(portNo, () => {
     console.log('起動しました', `http://localhost:${portNo}`)
 });
+
 // 外部プロセス呼び出し用に使用する。
 let exec = require('child_process').exec;
 // 暗号化用のモジュールを読み込む
