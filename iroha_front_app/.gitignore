@@ -25,3 +25,6 @@ yarn-error.log*
 # 設定ファイル
 /config
 /.env
+
+# TLS通信のための秘密鍵ファイル
+/server/tls/privatekey.pem
