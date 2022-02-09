@@ -18,12 +18,12 @@ function Home() {
     const location = useLocation();
     // loginAccoutId用変数
     let loginAccountId:string = '';
-    // 「チャージアカウント」ボタンを押した時の遷移先と渡す情報
+    // 「チャージ」ボタンを押した時の遷移先と渡す情報
     const ToCharge = { 
         accountId: accountId,
         domain: domain,
     };
-    // 「支払いアカウント」ボタンを押した時の遷移先と渡す情報
+    // 「支払」と「送金」ボタンを押した時の遷移先と渡す情報
     const ToPay = { 
         accountId: accountId,
         domain: domain,
@@ -53,10 +53,15 @@ function Home() {
                 <Link to='/charge' state={ToCharge}>
                     1．チャージ
                 </Link>
-            </Button>
+            </Button><br/><br/>
             <Button variant="contained" color="secondary" className={classes.button}>
                 <Link to='/pay' state={ToPay}>
                     2．支払
+                </Link>
+            </Button><br/><br/>
+            <Button variant="contained" color="secondary" className={classes.button}>
+                <Link to='/send' state={ToPay}>
+                    3．送金
                 </Link>
             </Button><br/><br/>
             <Button variant="outlined" color="primary">
