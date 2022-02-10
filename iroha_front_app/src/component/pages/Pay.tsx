@@ -79,14 +79,16 @@ function Pay(props:any) {
 
         // 支払い処理用のAPIを呼び出す。
         superAgent
-            .get(baseUrl + '/api/pay')
+            .post(baseUrl + '/api/pay')
             .query(params) 
             .end((err, res) => {
                 if (err) {
-                    console.log("支払い処理用API呼び出し中に失敗", err)
+                    console.log("支払い処理用API呼び出し中に失敗", err);
+                    alert("支払い処理失敗");
                     return err;
                 }
                 console.log("支払い処理用API呼び出し結果：", res);
+                alert("支払い処理成功");
             });
     }
 

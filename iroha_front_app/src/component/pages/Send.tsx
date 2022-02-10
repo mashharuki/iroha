@@ -2,14 +2,15 @@
  * 送金画面用のコンポーネントファイル
  */
 
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from 'react-router-dom';
-import { Button, MenuItem, Select } from "@material-ui/core";
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
+import { Button } from "@material-ui/core";
 import Grid from '@mui/material/Grid';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 import Input from '@material-ui/core/Input';
+import InputAdornment from '@mui/material/InputAdornment';
 import UseStyles from "../common/UseStyles";
 import superAgent from 'superagent';
 
@@ -18,8 +19,9 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
 
 /**
  * Sendコンポーネント
+ * @param props 引数
  */
- function Send(props:any) {
+function Send(props:any) {
     // ステート変数
     const [ accountId, setAccoutId ] = useState('');
     const [ prepay, setPrepay ] = useState(0);
@@ -29,6 +31,7 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
     const [ people, setPeople ] = useState(0);
     const [ useTime, setUseTime ] = useState(0.0);
     const [ total, setTotal ] = useState(0);
+    const [ successFlg, setSuccessFlg ] = useState(true);
     // chargAccoutId用変数
     let sendAccountId:string = ''
     // chargeDomain用変数
@@ -71,14 +74,18 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
 
         // 送金処理用のAPIを呼び出す。
         superAgent
-            .get(baseUrl + '/api/send')
+            .post(baseUrl + '/api/send')
             .query(params) 
             .end((err, res) => {
                 if (err) {
-                    console.log("送金処理用API呼び出し中に失敗", err)
+                    console.log("送金処理用API呼び出し中に失敗", err);
+                    // successFlgをfalseにする。
+                    setSuccessFlg(false);
                     return err;
                 }
                 console.log("送金処理用API呼び出し結果：", res);
+                setSuccessFlg(true);
+                alert("送金処理成功!");
             });
     }
 
@@ -91,6 +98,14 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
                 対象アカウントID：　{accountId}
             </p>
             <br/>
+            { !successFlg ? (
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        送金処理に失敗しました。
+                    </Alert>
+                </Stack>
+            ) : <></>}
             <Grid container direction="row" justifyContent="center" alignItems="center" >
                 <Grid item>
                     宛先アカウントID：
@@ -104,7 +119,11 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
                     送金額：
                 </Grid>
                 <Grid item>
-                    <Input id="sendAmount" className={classes.textField} onChange={(e:any) => { setTotal(e.target.value) }}/>
+                    <Input 
+                        id="sendAmount" 
+                        className={classes.textField} 
+                        onChange={(e:any) => { setTotal(e.target.value) }}
+                        startAdornment={<InputAdornment position="start">¥</InputAdornment>} />
                 </Grid>
             </Grid><br/>
             <Button variant="contained" color="secondary" onClick={sendAction}>
@@ -120,7 +139,7 @@ const baseUrl = process.env.REACT_APP_API_SERVER_URL;
             </Link>
         </div>
     );
- };
+};
 
- export default Send;
+export default Send;
 
