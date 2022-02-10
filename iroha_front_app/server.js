@@ -243,6 +243,65 @@ app.get('/api/pay', (req, res) => {
 });
 
 /**
+ * 送金用API
+ */
+app.get('/api/send', (req, res) => {
+    // パラメータから値を取得する。
+    const prepay = req.query.prepay;
+    const counter = req.query.counter;
+    const total = req.query.total;
+    const accountId = req.query.accountId;
+    const domain = req.query.domain;
+    const room = req.query.room;
+    const people = req.query.people;
+    const usetime = req.query.usetime;
+    // メッセージ
+    const msg = "send";
+    // アカウントの秘密鍵を取得する。
+    const privateKey = GetPrivKey.GetPrivKey(accountId, domain);
+
+    // アセット送金用のコマンドを作成
+    let COMMAND = ['node ./server/iroha/call/SendAssetCall.js', total, domain, accountId + '@' + domain, privateKey, msg, room + '@' + domain];
+    COMMAND = COMMAND.join(' ');
+    console.log('Execute COMMAND=', COMMAND);
+
+    // ブロック高用の変数
+    let block = 0;
+    // コマンドを実行する。
+    exec( COMMAND , function(error, stdout, stderr) {
+        if (error !== null) {                
+            console.log('exec error: ' + error);
+            res.status(500).send("トランザクション作成中にエラーが発生しました");
+            return
+        }
+        console.log(stdout)
+        //ブロック位置を取得
+        if (stdout.match(/height: (\d+),/) !== null){
+            block = stdout.match(/height: (\d+),/)[1];
+            console.log("block:", block);
+        } else {
+            //キーファイルより公開鍵を取得
+            block = (2^64)+1
+        }
+
+        // 実行するSQL
+        const query = 'INSERT INTO shiharai_info (id,prepay,ticket,total,shisetsu,ninzu,usetime,job) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
+        // パラメータ用の配列を作成する。
+        const values = [ accountId + '@' + domain, prepay, counter, total, room, people, usetime, msg ];
+        // DBの実行
+        pgHelper.execute(database1, query, values, (err, docs) => {
+            if (err) {
+                console.log(err.toString());
+                res.status(500).send("DB接続中にエラーが発生しました");
+                return;
+            }
+            console.log('実行結果：', docs);
+            // res.json({ roles: docs.rows });
+        });
+    });
+});
+
+/**
  * 取引履歴照会用API
  */
 app.get('/api/getTxHistory', (req, res) => {
@@ -295,6 +354,7 @@ app.post('/api/login', (req, res) => {
 app.use('/input', express.static('./build'));
 app.use('/pay', express.static('./build'));
 app.use('/charge', express.static('./build'));
+app.use('/send', express.static('./build'));
 app.use('/login', express.static('./build'));
 app.use('/txHistory', express.static('./build'));
 app.use('/', express.static('./build'));
