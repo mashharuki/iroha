@@ -105,6 +105,31 @@ paths:
           description: "トランザクション作成中にエラーが発生しました。"
         "501":
           description: "DB接続中にエラーが発生しました。"
+  /send:
+    post:
+      tags:
+      - "Iroha_front_app"
+      summary: "送金"
+      description: "アプリ内で使用するデジタル通貨を送金するためのAPIです。"
+      operationId: "send"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "送金するデジタル通貨の情報です。"
+        required: true
+        schema:
+          $ref: "#/definitions/Pay"
+      responses:
+        "200":
+          description: "正常に送金処理が完了しました。"
+        "500":
+          description: "トランザクション作成中にエラーが発生しました。"
+        "501":
+          description: "DB接続中にエラーが発生しました。"
   /getTxHistory:
     get:
       tags:
@@ -155,7 +180,7 @@ paths:
           description: "トランザクション作成中にエラーが発生しました。"
         "501":
           description: "DB接続中にエラーが発生しました。"
-  
+
 definitions:
   Charge:
     type: "object"
