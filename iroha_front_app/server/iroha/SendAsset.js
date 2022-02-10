@@ -56,8 +56,8 @@ Promise.all([
       }, {
         srcAccountId: accountId,
         destAccountId: tAccountId,
-        assetId: 'total#' + domain ,
-        description: msg ,
+        assetId: 'total#' + domain,
+        description: msg,
         amount: total
       }),
 ])

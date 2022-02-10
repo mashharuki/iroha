@@ -19,7 +19,7 @@ const server = require('https').createServer({
 
 // 起動
 server.listen(portNo, () => {
-    console.log('起動しました', `http://localhost:${portNo}`)
+    console.log('起動しました', `https://localhost:${portNo}`)
 });
 
 // 外部プロセス呼び出し用に使用する。
@@ -296,7 +296,7 @@ app.get('/api/send', (req, res) => {
                 return;
             }
             console.log('実行結果：', docs);
-            // res.json({ roles: docs.rows });
+            res.status(200).send("送金成功!");
         });
     });
 });

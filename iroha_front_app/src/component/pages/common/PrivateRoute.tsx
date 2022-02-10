@@ -10,6 +10,7 @@ import Charge from './../Charge';
 import NoPage from './../NoPage';
 import TxHistory from './../TxHistory';
 import Login from './../Login';
+import Send from "./../Send";
 
 /**
  * PrivateRouteコンポーネント
@@ -24,6 +25,7 @@ const PrivateRoute: React.FC<RouteProps> = ({...props}) => {
       <Route path="/" element={<Home />} />
       <Route path="/pay" element={<Pay />} />
       <Route path="/charge" element={<Charge />} />
+      <Route path="/send" element={<Send />} />
       <Route path="/txHistory" element={<TxHistory />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<NoPage />} />

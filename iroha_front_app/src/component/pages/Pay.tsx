@@ -191,7 +191,7 @@ function Pay(props:any) {
                     取引履歴照会
                 </Link>
             </Button><br/><br/>
-            <Link to={{ pathname: '/'}}>
+            <Link to={{ pathname: '/'}} state={ToTxHistory}>
                 メインメニューに戻る
             </Link>
         </div>

@@ -59,7 +59,7 @@ function TxHistory(props:any) {
     // chargeDomain用変数
     let chargeDomain:string = '';   
     const location = useLocation();
-    // 「取引履歴照会」ボタンを押した時の遷移先と渡す情報
+    // 「メインメニューへ戻る」ボタンを押した時の遷移先と渡す情報
     const ToHome = { 
         accountId: accountId,
         domain: domain,
