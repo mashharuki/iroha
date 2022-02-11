@@ -28,3 +28,6 @@ yarn-error.log*
 
 # TLS通信のための秘密鍵ファイル
 /server/tls/privatekey.pem
+
+# ログ出力ファイル
+/server/log/server.log
