@@ -4,6 +4,7 @@
 
 // Webサーバーの起動
 const express = require('express');
+var log4js = require('log4js');
 const fs = require('fs');
 const app = express();
 // ポート番号
@@ -11,6 +12,10 @@ const portNo = 3001;
 // 接続するデータベース名
 const database1 = 'reidai';
 const database2 = 'iroha_default';
+// log4jsの設定
+log4js.configure('./server/log/log4js_setting.json');
+const logger = log4js.getLogger("server");
+
 // HTTPS通信に対応するための設定
 const server = require('https').createServer({
     key: fs.readFileSync('./server/tls/privatekey.pem'),
@@ -19,7 +24,7 @@ const server = require('https').createServer({
 
 // 起動
 server.listen(portNo, () => {
-    console.log('起動しました', `http://localhost:${portNo}`)
+    logger.debug('起動しました', `https://localhost:${portNo}`)
 });
 
 // 外部プロセス呼び出し用に使用する。
@@ -45,11 +50,11 @@ const GetPrivKey = require('./server/key/GetPrivKey');
     // DBの実行
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
-            console.log(err.toString());
+            logger.error(err.toString());
             res.status(500).send("テスト用API実行失敗");
             return;
         }
-        console.log('取得結果：', docs.rows);
+        logger.debug('取得結果：', docs.rows);
         res.json({ roles: docs.rows });
     });
 });
@@ -66,7 +71,7 @@ const GetPrivKey = require('./server/key/GetPrivKey');
         publicKey = Keycreate.Keycreate();
         res.json({ publicKey: publicKey });
     } catch(err) {
-        console.log('exec error: ' + err);
+        logger.debug('exec error: ' + err);
         res.status(500).send("公開鍵取得中にエラーが発生しました。");
     }
  });
@@ -95,20 +100,20 @@ app.get('/api/input', (req, res) => {
     // アカウント作成用のコマンドを作成
     let COMMAND = ['node ./server/iroha/call/CreateAccountCall.js', domain, accountId, publicKey];
     COMMAND = COMMAND.join(' ');
-    console.log('Execute COMMAND=', COMMAND);
+    logger.debug('Execute COMMAND=', COMMAND);
 
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error);
+            logger.error('exec error: ' + error);
             res.status(500).send("トランザクション作成中にエラーが発生しました");
             return
         }
-        console.log(stdout)
+        logger.debug(stdout)
         //ブロック位置を取得
         if (stdout.match(/height: (\d+),/) !== null){
             block = stdout.match(/height: (\d+),/)[1];
-            console.log("block:", block);
+            logger.debug("block:", block);
         } else {
             //キーファイルより公開鍵を取得
             block = (2^64)+1
@@ -120,7 +125,7 @@ app.get('/api/input', (req, res) => {
         // DBの実行
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
-                console.log(err.toString());
+                logger.error(err.toString());
                 res.status(501).send("DB接続中にエラーが発生しました");
                 return;
             }
@@ -146,22 +151,22 @@ app.get('/api/charge', (req, res) => {
     // アカウント作成用のコマンドを作成
     let COMMAND = ['node ./server/iroha/call/ChargeAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey];
     COMMAND = COMMAND.join(' ');
-    console.log('Execute COMMAND=', COMMAND);
+    logger.debug('Execute COMMAND=', COMMAND);
 
     // ブロック高用の変数
     let block = 0;
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error);
+            logger.error('exec error: ' + error);
             res.status(500).send("トランザクション作成中に発生しました。");
             return
         }
-        console.log(stdout)
+        logger.debug(stdout)
         //ブロック位置を取得
         if (stdout.match(/height: (\d+),/) !== null){
             block = stdout.match(/height: (\d+),/)[1];
-            console.log("block:", block);
+            logger.debug("block:", block);
         } else {
             //キーファイルより公開鍵を取得
             block = (2^64)+1
@@ -174,7 +179,7 @@ app.get('/api/charge', (req, res) => {
         // DBの実行
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
-                console.log(err.toString());
+                logger.error(err.toString());
                 res.status(501).send("DB接続中にエラーが発生しました。");
                 return;
             }
@@ -204,22 +209,22 @@ app.get('/api/pay', (req, res) => {
     // アセット送金用のコマンドを作成
     let COMMAND = ['node ./server/iroha/call/PayAssetCall.js', prepay, counter, total, domain, accountId + '@' + domain, privateKey, msg];
     COMMAND = COMMAND.join(' ');
-    console.log('Execute COMMAND=', COMMAND);
+    logger.debug('Execute COMMAND=', COMMAND);
 
     // ブロック高用の変数
     let block = 0;
     // コマンドを実行する。
     exec( COMMAND , function(error, stdout, stderr) {
         if (error !== null) {                
-            console.log('exec error: ' + error);
+            logger.error('exec error: ' + error);
             res.status(500).send("トランザクション作成中にエラーが発生しました");
             return
         }
-        console.log(stdout)
+        logger.debug(stdout)
         //ブロック位置を取得
         if (stdout.match(/height: (\d+),/) !== null){
             block = stdout.match(/height: (\d+),/)[1];
-            console.log("block:", block);
+            logger.debug("block:", block);
         } else {
             //キーファイルより公開鍵を取得
             block = (2^64)+1
@@ -232,11 +237,11 @@ app.get('/api/pay', (req, res) => {
         // DBの実行
         pgHelper.execute(database1, query, values, (err, docs) => {
             if (err) {
-                console.log(err.toString());
+                logger.error(err.toString());
                 res.status(500).send("DB接続中にエラーが発生しました");
                 return;
             }
-            console.log('実行結果：', docs);
+            logger.debug('実行結果：', docs);
             // res.json({ roles: docs.rows });
         });
     });
@@ -256,11 +261,11 @@ app.get('/api/getTxHistory', (req, res) => {
     // DBの実行
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
-            console.log(err.toString());
+            logger.error(err.toString());
             res.status(501).send("DB接続中にエラーが発生しました");
             return;
         }
-        console.log('実行結果：', docs.rows);
+        logger.debug('実行結果：', docs.rows);
         res.status(200).send(docs.rows);
     });
 });
@@ -282,11 +287,11 @@ app.post('/api/login', (req, res) => {
     // DBの実行
     pgHelper.execute(database1, query, values, (err, docs) => {
         if (err) {
-            console.log(err.toString());
+            logger.error(err.toString());
             res.status(500).send("DB接続中にエラーが発生しました");
             return; 
         }
-        // console.log('実行結果：', docs.rows);
+        logger.debug('実行結果：', docs.rows);
         res.status(200).send(docs.rows);
     });
 });

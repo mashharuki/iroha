@@ -29,6 +29,7 @@
     "iroha-helpers": "^0.6.21",
     "iroha-helpers-ts": "^0.9.25-ss",
     "js-sha512": "^0.8.0",
+    "log4js": "^6.4.1",
     "node-pre-gyp": "^0.17.0",
     "pg": "^8.7.1",
     "react": "^17.0.2",
