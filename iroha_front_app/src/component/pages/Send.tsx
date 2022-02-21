@@ -29,7 +29,7 @@ function Send(props:any) {
     const [ domain, setDomain ] = useState('');
     const [ room, setRoom ] = useState('');
     const [ people, setPeople ] = useState(0);
-    const [ useTime, setUseTime ] = useState(0.0);
+    const [ useTime, setUseTime ] = useState(0);
     const [ total, setTotal ] = useState(0);
     const [ successFlg, setSuccessFlg ] = useState(true);
     // chargAccoutId用変数
@@ -59,7 +59,7 @@ function Send(props:any) {
     /**
      * 「送金」ボタンを押した時に処理する関数
      */
-     const sendAction = () => {
+    const sendAction = () => {
         // API用のパラメータ変数
         const params = {
             prepay: prepay,
@@ -70,7 +70,7 @@ function Send(props:any) {
             room: room,
             people: people,
             useTime: useTime,
-        }
+        };
 
         // 送金処理用のAPIを呼び出す。
         superAgent

@@ -70,10 +70,12 @@ function Charge(props:any) {
             .query(params) 
             .end((err, res) => {
                 if (err) {
-                    console.log("チャージ処理用API呼び出し中に失敗", err)
+                    console.log("チャージ処理用API呼び出し中に失敗", err);
+                    alert("チャージ失敗");
                     return err;
                 }
                 console.log("チャージ処理用API呼び出し結果：", res);
+                alert("チャージ成功!");
             });
     }
 
